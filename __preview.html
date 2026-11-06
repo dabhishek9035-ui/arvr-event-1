@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Orientation check</title>
+<style>
+  body { margin: 0; background: #10101c; color: #eef; font: 14px monospace; display: flex; flex-wrap: wrap; }
+  .cell { width: 360px; height: 360px; position: relative; border: 1px solid #333; }
+  .cell span { position: absolute; top: 8px; left: 8px; z-index: 2; background: rgba(0,0,0,.5); padding: 4px 8px; }
+  canvas { display: block; }
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "/node_modules/three/build/three.module.js",
+  "three/addons/": "/node_modules/three/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<div class="cell"><span>rot.y = 0</span></div>
+<div class="cell"><span>rot.y = 90°</span></div>
+<div class="cell"><span>rot.y = 180°</span></div>
+<div class="cell"><span>rot.y = 270°</span></div>
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
+const rots = [0, Math.PI / 2, Math.PI, (3 * Math.PI) / 2];
+const cells = document.querySelectorAll('.cell');
+
+const loader = new GLTFLoader(); loader.load('/public/models/_candidates/a-toastie.glb', (gltf) => {
+  rots.forEach((rot, i) => {
+    const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+    renderer.setSize(360, 360);
+    renderer.toneMapping = THREE.NeutralToneMapping;
+    cells[i].appendChild(renderer.domElement);
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color('#181826');
+    const camera = new THREE.PerspectiveCamera(35, 1, 0.01, 100);
+    scene.add(new THREE.HemisphereLight('#bcd', '#223', 1.2));
+    const key = new THREE.DirectionalLight('#fff', 2.0);
+    key.position.set(3, 4, 5);
+    scene.add(key);
+
+    const model = gltf.scene.clone(true);
+    model.updateMatrixWorld(true);
+    const box = new THREE.Box3().setFromObject(model);
+    const size = box.getSize(new THREE.Vector3());
+    const center = box.getCenter(new THREE.Vector3());
+    const s = 2.2 / Math.max(size.x, size.y, size.z);
+    model.position.sub(center);
+    const wrap = new THREE.Group();
+    wrap.add(model);
+    wrap.scale.setScalar(s);
+    wrap.rotation.y = rot;
+    scene.add(wrap);
+    camera.position.set(0, 0.2, 5.2);
+    camera.lookAt(0, 0, 0);
+    renderer.render(scene, camera);
+  });
+  window.__ready = true;
+});
+
+window.__getShots = () => Array.from(document.querySelectorAll('canvas')).map((c) => c.toDataURL('image/png'));
+</script>
+</body>
+</html>

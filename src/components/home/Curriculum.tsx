@@ -1,0 +1,136 @@
+'use client';
+
+import { useEffect, useRef, useState } from 'react';
+import Eyebrow from '@/components/ui/Eyebrow';
+import { MODULES, type Module } from '@/content/skillLab';
+import { motion as scrollMotion } from '@/lib/motion';
+import { useStore } from '@/state/store';
+
+/**
+ * Section 3: Curriculum (§9.4) — pinned horizontal scroll through 9 module
+ * cards while the camera flies through 9 corridor gates (pin3 shared).
+ * Vertical stacked fallback under 760 px / reduced motion / no JS.
+ */
+
+function Head() {
+  return (
+    <div className="curriculum-head">
+      <Eyebrow>03 / CURRICULUM</Eyebrow>
+      <h2 className="h2">
+        Nine modules.
+        <br />
+        <span className="accent-text">Twelve hours.</span>
+      </h2>
+    </div>
+  );
+}
+
+function Card({ m, active }: { m: Module; active: boolean }) {
+  const hrs = Number.isInteger(m.hours) ? `${m.hours}` : m.hours.toFixed(1);
+  return (
+    <article className={`module-card glass${active ? ' active' : ''}`}>
+      <span className="pill module-hours">{hrs} HRS</span>
+      <span className="module-numeral" aria-hidden="true">
+        {m.roman}
+      </span>
+      <h3 className="h3-lg module-title">{m.title}</h3>
+      <p className="module-blurb">{m.blurb}</p>
+      <span className="micro module-index">MODULE {m.roman} / IX</span>
+    </article>
+  );
+}
+
+export default function Curriculum() {
+  const reduced = useStore((s) => s.reducedMotion);
+  const pinned = !reduced;
+
+  const [travel, setTravel] = useState(0);
+  const [active, setActive] = useState(0);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const barRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!pinned) return;
+    const measure = () => {
+      const track = trackRef.current;
+      if (!track) return;
+      setTravel(Math.max(0, track.scrollWidth - window.innerWidth));
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    if (trackRef.current) ro.observe(trackRef.current);
+    window.addEventListener('resize', measure);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener('resize', measure);
+    };
+  }, [pinned]);
+
+  useEffect(() => {
+    if (!pinned) return;
+    let raf = 0;
+    let lastActive = -1;
+    const tick = () => {
+      raf = requestAnimationFrame(tick);
+      const track = trackRef.current;
+      const bar = barRef.current;
+      if (!track || !bar) return;
+      const p = scrollMotion.pin3;
+      track.style.transform = `translate3d(${(-travel * p).toFixed(2)}px, 0, 0)`;
+      bar.style.width = `${(p * 100).toFixed(2)}%`;
+      const idx = Math.round(p * (MODULES.length - 1));
+      if (idx !== lastActive) {
+        lastActive = idx;
+        setActive(idx);
+      }
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [pinned, travel]);
+
+  if (!pinned) {
+    return (
+      <section id="curriculum" data-section="curriculum" className="section curriculum-section stacked">
+        <div className="container">
+          <Head />
+          <div className="module-stack">
+            {MODULES.map((m) => (
+              <Card key={m.index} m={m} active />
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  const hours = MODULES[active]?.cumulative ?? 0;
+  const hoursLabel = Number.isInteger(hours) ? `${hours}` : hours.toFixed(1);
+
+  return (
+    <section
+      id="curriculum"
+      data-section="curriculum"
+      className="section curriculum-section"
+      style={{ height: `calc(100vh + ${travel}px)` }}
+    >
+      <div className="curriculum-sticky">
+        <Head />
+        <div className="curriculum-viewport">
+          <div className="module-track" ref={trackRef}>
+            {MODULES.map((m, i) => (
+              <Card key={m.index} m={m} active={i === active} />
+            ))}
+          </div>
+        </div>
+        <div className="curriculum-progress">
+          <div className="progress-track">
+            <div className="progress-fill" ref={barRef} />
+          </div>
+          <span className="micro progress-counter">
+            {String(active + 1).padStart(2, '0')} / 09 · {hoursLabel} / 12 HRS
+          </span>
+        </div>
+      </div>
+    </section>
+  );
+}
