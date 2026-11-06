@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import RegisterShell, { RegisterIntro } from '@/components/register/RegisterShell';
 
 export const metadata: Metadata = {
-  title: 'Register · AR/VR Club · BMSIT&M',
-  description: 'Register for the AR/VR Club and the 2-day XR Skill Lab.',
+  title: 'Register · XR Skill Lab · BMSIT&M',
+  description: 'Register for the 2-day, hands-on XR Skill Lab at BMSIT&M.',
 };
 
 /** /register (§10): intro column + 4-step form card. */

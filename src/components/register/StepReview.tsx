@@ -35,7 +35,6 @@ const GROUPS: {
     title: 'INTEREST',
     step: 2,
     rows: [
-      { label: 'Registering for', get: (v) => v.registeringFor.join(', ') || '—' },
       { label: 'Experience with Unity / VR / 3D', get: (v) => v.experience || '—' },
       { label: 'Programming comfort', get: (v) => v.programming || '—' },
       { label: 'XR applications that excite you', get: (v) => v.interests?.join(', ') || '—' },

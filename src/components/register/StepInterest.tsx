@@ -5,7 +5,6 @@ import { Check } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import { useFormContext } from 'react-hook-form';
 import {
-  REG_FOR,
   EXPERIENCE_LEVELS,
   PROGRAMMING_LEVELS,
   INTERESTS,
@@ -15,7 +14,7 @@ import ChipGroup from './ChipGroup';
 import ChoiceGroup from './ChoiceGroup';
 import { FieldError, TextAreaField } from './Field';
 
-/** Step 3: Interest (§10.5) — chips, choices, reason, consent. */
+/** Step 3: Interest (§10.5) — experience, programming, interests, consent. */
 export default function StepInterest({
   onBack,
   onContinue,
@@ -33,14 +32,9 @@ export default function StepInterest({
   return (
     <form onSubmit={onSubmit} noValidate>
       <h2 className="step-heading" tabIndex={-1}>
-        What are you here for?
+        A bit about your experience
       </h2>
       <div className="field-rows">
-        <ChipGroup
-          name="registeringFor"
-          legend="I'm registering for"
-          options={REG_FOR}
-        />
         <ChoiceGroup
           name="experience"
           legend="Experience with Unity / VR / 3D"
@@ -66,7 +60,7 @@ export default function StepInterest({
             <Check size={14} strokeWidth={3} />
           </span>
           <span>
-            I agree that the AR/VR Club may contact me about the club and the XR Skill Lab.
+            I agree that the organisers may contact me about the XR Skill Lab.
           </span>
         </label>
         <FieldError message={consentError?.message} />

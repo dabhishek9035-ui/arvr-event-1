@@ -126,12 +126,12 @@ export function RegisterIntro() {
     <div className="register-intro">
       <Eyebrow>REGISTER</Eyebrow>
       <h1 className="register-h1">
-        Join the club.
+        Register for the
         <br />
-        <span className="accent-text">Build in VR.</span>
+        <span className="accent-text">XR Skill Lab.</span>
       </h1>
       <p className="lead">
-        Tell us a bit about you. Pick club membership, the 2-day XR Skill Lab, or both.
+        Tell us a bit about you to save your seat for the 2-day, hands-on XR Skill Lab.
       </p>
       <ul className="register-facts">
         <li>

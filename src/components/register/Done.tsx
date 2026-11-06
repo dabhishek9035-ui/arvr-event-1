@@ -53,8 +53,8 @@ export default function Done({ onEdit }: { onEdit: () => void }) {
         Registration ready.
       </h2>
       <p className="done-body">
-        This site isn&rsquo;t connected to the club&rsquo;s registration system yet, so nothing
-        has been sent. Download or copy your details and share them with the club organisers.
+        This site isn&rsquo;t connected to the workshop&rsquo;s registration system yet, so
+        nothing has been sent. Download or copy your details and share them with the organisers.
       </p>
       <div className="done-actions">
         <button type="button" className="btn btn-primary btn-md" onClick={download}>

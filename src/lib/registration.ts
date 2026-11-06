@@ -13,12 +13,11 @@ export const BRANCHES = [
 ] as const;
 
 export const YEARS = ['1st', '2nd', '3rd', '4th'] as const;
-export const REG_FOR = ['AR/VR Club membership', 'XR Skill Lab (2 days)'] as const;
 export const EXPERIENCE_LEVELS = ['None yet', 'Some', 'Comfortable'] as const;
 export const PROGRAMMING_LEVELS = ['Basic', 'Intermediate', 'Advanced'] as const;
 export const INTERESTS = ['Engineering', 'Creative', 'Industrial', 'Educational', 'Games', 'Other'] as const;
 
-/** Full registration schema. Error strings are exact per plan §10.5. */
+/** Full registration schema (workshop only). Error strings are exact per plan §10.5. */
 export const registrationSchema = z.object({
   fullName: z.string().trim().min(2, 'Enter your full name.').max(80, 'Enter your full name.'),
   email: z.string().trim().toLowerCase().email('Enter a valid email address.'),
@@ -30,7 +29,6 @@ export const registrationSchema = z.object({
   usn: z.string().trim().regex(/^[A-Za-z0-9-]{5,20}$/, 'Enter your USN or student ID.'),
   branch: z.string().min(1, 'Select your branch.'),
   year: z.string().min(1, 'Select your year.'),
-  registeringFor: z.array(z.string()).min(1, 'Pick at least one.'),
   experience: z.string().min(1, 'Select one.'),
   programming: z.string().min(1, 'Select one.'),
   interests: z.array(z.string()).default([]),
@@ -45,7 +43,7 @@ export type RegistrationData = z.output<typeof registrationSchema>;
 export const STEP_FIELDS: string[][] = [
   ['fullName', 'email', 'phone'],
   ['institution', 'usn', 'branch', 'year'],
-  ['registeringFor', 'experience', 'programming', 'interests', 'reason', 'consent'],
+  ['experience', 'programming', 'interests', 'reason', 'consent'],
   [],
 ];
 
@@ -55,11 +53,10 @@ export const DEFAULT_REGISTRATION: RegistrationInput = {
   fullName: '',
   email: '',
   phone: '',
-  institution: '',
+  institution: 'BMSIT&M',
   usn: '',
   branch: '',
   year: '',
-  registeringFor: [],
   experience: '',
   programming: '',
   interests: [],
@@ -103,7 +100,7 @@ export function registrationJson(data: RegistrationData): string {
 
 export function registrationSummary(data: RegistrationData): string {
   return [
-    'AR/VR Club — Registration details',
+    'XR Skill Lab — Registration details',
     '',
     '— You —',
     `Full name: ${data.fullName}`,
@@ -117,7 +114,6 @@ export function registrationSummary(data: RegistrationData): string {
     `Year of study: ${data.year}`,
     '',
     '— Interest —',
-    `Registering for: ${data.registeringFor.join(', ')}`,
     `Experience with Unity / VR / 3D: ${data.experience}`,
     `Programming comfort: ${data.programming}`,
     `XR applications that excite you: ${data.interests.length ? data.interests.join(', ') : '—'}`,
