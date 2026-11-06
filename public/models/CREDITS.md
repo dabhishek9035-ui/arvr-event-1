@@ -10,13 +10,18 @@
 
 **Pipeline applied:**
 
-1. `scripts/prepare_owner_model.mjs` — weld → simplify 592,720 → 41,490 triangles
-   (meshopt simplifier, ratio 0.07, error 0.05) → assigned neutral studio-grey PBR
-   material (the source mesh had none) → root nodes rotated 180° around Y so the
-   visor faces +Z.
-2. `npx @gltf-transform/cli optimize … --compress meshopt --texture-compress webp`
-   (498 KB → 138 KB).
-3. Verified with `npm run report:model` (all budgets OK) and visually in the scene.
+1. `scripts/prepare_owner_model.mjs` — weld (topology merge, full **592,720 triangles**
+   retained at the owner's request) → assigned near-black charcoal PBR material
+   (linear 0.016/0.016/0.02, metal 0.1, roughness 0.5 — the source mesh had none).
+   No rotation: the scan's visor natively faces +Z.
+2. `npx @gltf-transform/cli optimize … --compress meshopt --simplify false`
+   (10.67 MB → 1.79 MB; no simplification).
+3. Verified with `npm run report:model` (two intentional budget overrides:
+   triangles 592,720 and file 1.79 MB — owner-requested full resolution) and
+   visually in the scene.
+
+**Performance note:** the full-resolution mesh is fine on desktop GPUs; on low-end
+mobile it may drop below the 30 fps target since geometry is not tiered.
 
 ---
 

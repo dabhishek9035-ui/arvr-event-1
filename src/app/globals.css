@@ -34,10 +34,10 @@
 }
 
 [data-theme='holo'] {
-  --bg: #04050d;
-  --bg-elev: #0a0c1c;
-  --panel: rgba(12, 14, 34, 0.62);
-  --panel-strong: rgba(10, 12, 28, 0.8);
+  --bg: #030409;
+  --bg-elev: #080a16;
+  --panel: rgba(9, 11, 24, 0.66);
+  --panel-strong: rgba(7, 9, 20, 0.82);
   --line: rgba(148, 163, 255, 0.16);
   --line-strong: rgba(148, 163, 255, 0.34);
   --text: #eef1ff;
@@ -78,8 +78,8 @@ body {
   font: 400 16px/1.65 var(--font-body);
   -webkit-font-smoothing: antialiased;
   background:
-    radial-gradient(1200px 700px at 78% 28%, rgba(35, 42, 102, 0.4), transparent 60%),
-    radial-gradient(900px 600px at 12% 82%, rgba(94, 234, 255, 0.08), transparent 60%),
+    radial-gradient(1200px 700px at 78% 28%, rgba(13, 16, 34, 0.45), transparent 60%),
+    radial-gradient(900px 600px at 12% 82%, rgba(94, 234, 255, 0.06), transparent 60%),
     var(--bg);
   min-height: 100vh;
 }

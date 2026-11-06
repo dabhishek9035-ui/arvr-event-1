@@ -54,8 +54,8 @@ export const KEYS: Keyframe[] = [
   },
   {
     at: 5.5, cam: [0, 0, 8.0], look: [1.0, 0, 0],
-    hero: { p: [2.4, -0.1, 0], r: [0.05, 0, 0], s: 0.75, pr: 1 },
-    L: L({ grid: 0.25, rings: 0.4, cycle: 1 }),
+    hero: { p: [2.4, 0, 0], r: [0.05, 0, 0], s: 0.0, pr: 0 },
+    L: L({ grid: 0.25, rings: 0.2, cycle: 1 }),
   },
   {
     at: 6.5, cam: [0, 0.1, 9.0], look: [0, 0, 0],

@@ -39,17 +39,20 @@ const io = new NodeIO()
 
 const doc = await io.read(inPath);
 
-// 1. weld + simplify (592k tris is far over the 60k hero budget)
+// 1. weld always; simplify only when a ratio below 1 is requested
 await doc.transform(weld());
-await MeshoptSimplifier.ready;
-await doc.transform(simplify({ simplifier: MeshoptSimplifier, ratio, error: targetError }));
+if (ratio < 0.999) {
+  await MeshoptSimplifier.ready;
+  await doc.transform(simplify({ simplifier: MeshoptSimplifier, ratio, error: targetError }));
+}
 
-// 2. the source has no material — give it a mid-dark studio-grey PBR surface
-//    (linear-space factors; ~sRGB 0.35 grey so it holds up under the strong rig)
+// 2. the source has no material — near-black charcoal PBR surface
+//    (linear-space factors; ~sRGB #101014 so it reads as black plastic
+//    under the studio rig while the cyan rim light keeps the silhouette)
 const material = doc.createMaterial('HeadsetMat');
-material.setBaseColorFactor([0.16, 0.17, 0.2, 1.0]);
-material.setMetallicFactor(0.0);
-material.setRoughnessFactor(0.62);
+material.setBaseColorFactor([0.016, 0.016, 0.02, 1.0]);
+material.setMetallicFactor(0.1);
+material.setRoughnessFactor(0.5);
 for (const mesh of doc.getRoot().listMeshes()) {
   for (const prim of mesh.listPrimitives()) {
     prim.setMaterial(material);

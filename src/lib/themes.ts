@@ -9,15 +9,15 @@ export type Theme = {
 };
 
 /**
- * Single dark theme. c1/c2 are graphite-indigo tones chosen to blend with the
- * headset's dark grey scan material; c3 is the cyan accent shared by the rings,
- * grid and rim light.
+ * Single dark theme. Near-black graphite tones matched to the black headset:
+ * c1/c2 keep just enough indigo to read as space; c3 is the cyan accent shared
+ * by the rings, grid and rim light (what keeps a black object legible).
  */
 export const THEMES: Theme[] = [
   {
     id: 'holo', label: 'Holo', mode: 'dark',
     scene: {
-      bg: '#04050D', c1: '#0A0E24', c2: '#232A66', c3: '#6BE8FF', particle: '#8FD8E8',
+      bg: '#030409', c1: '#05060D', c2: '#10142B', c3: '#59D8F2', particle: '#6FA8B8',
       additive: true, bloom: 0.7, warp: 0.5, rim: '#5EEAFF',
     },
   },
