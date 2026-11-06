@@ -44,11 +44,12 @@ await doc.transform(weld());
 await MeshoptSimplifier.ready;
 await doc.transform(simplify({ simplifier: MeshoptSimplifier, ratio, error: targetError }));
 
-// 2. the source has no material — give it a neutral studio-grey PBR surface
+// 2. the source has no material — give it a mid-dark studio-grey PBR surface
+//    (linear-space factors; ~sRGB 0.35 grey so it holds up under the strong rig)
 const material = doc.createMaterial('HeadsetMat');
-material.setBaseColorFactor([0.42, 0.44, 0.48, 1.0]);
-material.setMetallicFactor(0.15);
-material.setRoughnessFactor(0.5);
+material.setBaseColorFactor([0.16, 0.17, 0.2, 1.0]);
+material.setMetallicFactor(0.0);
+material.setRoughnessFactor(0.62);
 for (const mesh of doc.getRoot().listMeshes()) {
   for (const prim of mesh.listPrimitives()) {
     prim.setMaterial(material);
