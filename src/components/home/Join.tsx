@@ -21,8 +21,7 @@ export default function Join() {
         </Reveal>
         <Reveal delay={0.1}>
           <p className="lead join-lead">
-            Dates for the Skill Lab are yet to be confirmed by BMSIT&amp;M. Register now so the
-            club can reach you as soon as they are.
+            The Skill Lab runs on 19 &amp; 20 November 2026. Register now to save your seat.
           </p>
         </Reveal>
         <Reveal delay={0.15}>
@@ -31,7 +30,7 @@ export default function Join() {
           </Button>
         </Reveal>
         <Reveal delay={0.2}>
-          <p className="micro join-meta">TWO DAYS · TWELVE HOURS · META QUEST</p>
+          <p className="micro join-meta">19–20 NOVEMBER 2026 · TWO DAYS · TWELVE HOURS · META QUEST</p>
         </Reveal>
       </div>
     </section>

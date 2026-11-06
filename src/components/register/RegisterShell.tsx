@@ -148,7 +148,7 @@ export function RegisterIntro() {
         </li>
       </ul>
       <span className="pill pill-accent register-dates">
-        SKILL LAB DATES · TO BE CONFIRMED BY BMSIT&amp;M
+        SKILL LAB DATES · 19–20 NOVEMBER 2026
       </span>
     </div>
   );

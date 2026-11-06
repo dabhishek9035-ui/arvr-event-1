@@ -21,7 +21,7 @@ export const PROGRAMME = {
   xrFramework: 'OpenXR · XR Interaction Toolkit',
   delivery: 'In person · hands-on · project based',
   assessment: 'Practical exercises and mini-project demonstration',
-  dates: 'To be confirmed by BMSIT&M',
+  dates: '19 & 20 November 2026',
   trainingPartner: 'Bodyclone Innovations Private Limited',
 } as const;
 

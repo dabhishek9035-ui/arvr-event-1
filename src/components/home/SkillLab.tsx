@@ -19,7 +19,7 @@ const SPEC_ROWS: { label: string; value: ReactNode }[] = [
   { label: 'ASSESSMENT', value: 'Practical exercises and mini-project demonstration' },
   {
     label: 'DATES',
-    value: <span className="pill pill-accent">TO BE CONFIRMED BY BMSIT&amp;M</span>,
+    value: <span className="pill pill-accent">19 &amp; 20 NOVEMBER 2026</span>,
   },
 ];
 
