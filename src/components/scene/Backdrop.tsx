@@ -48,7 +48,7 @@ void main() {
   float vig = 1.0 - 0.32 * smoothstep(0.3, 0.85, length(c * vec2(1.15, 1.0)) * 1.414);
   col *= vig;
   col *= mix(0.68, 1.0, smoothstep(0.0, 0.45, uv.x));
-  col *= 0.85 * uBright;
+  col *= 0.8 * uBright;
   gl_FragColor = vec4(col, 1.0);
 ${GLSL_FINISH}
   gl_FragColor.rgb += (hash21(gl_FragCoord.xy + uTime) - 0.5) / 255.0;

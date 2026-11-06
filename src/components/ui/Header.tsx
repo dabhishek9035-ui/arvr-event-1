@@ -7,7 +7,6 @@ import { Menu } from 'lucide-react';
 import { CLUB } from '@/config/club';
 import { useStore } from '@/state/store';
 import VisorGlyph from './VisorGlyph';
-import ThemeSwitcher from './ThemeSwitcher';
 import LoadBar from './LoadBar';
 import Drawer from './Drawer';
 
@@ -50,7 +49,6 @@ export default function Header() {
             ))}
           </nav>
           <div className="header-right">
-            <ThemeSwitcher />
             <Link href="/register" className="btn btn-primary btn-sm header-register">
               Register
             </Link>

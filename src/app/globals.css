@@ -50,23 +50,6 @@
   --glow: 94, 234, 255;
 }
 
-[data-theme='daylight'] {
-  --bg: #f3f6fb;
-  --bg-elev: #ffffff;
-  --panel: rgba(255, 255, 255, 0.72);
-  --panel-strong: rgba(255, 255, 255, 0.88);
-  --line: rgba(20, 30, 80, 0.12);
-  --line-strong: rgba(20, 30, 80, 0.28);
-  --text: #0b1030;
-  --muted: #4a5176;
-  --accent: #4a3cf0;
-  --accent-2: #0a8fb0;
-  --on-accent: #ffffff;
-  --danger: #c21f45;
-  --ok: #0e8f5f;
-  --glow: 74, 60, 240;
-}
-
 /* Body gradient doubles as the no-WebGL / context-lost fallback (§12.4). */
 html {
   background: var(--bg);
@@ -95,16 +78,10 @@ body {
   font: 400 16px/1.65 var(--font-body);
   -webkit-font-smoothing: antialiased;
   background:
-    radial-gradient(1200px 700px at 78% 28%, rgba(59, 48, 201, 0.35), transparent 60%),
-    radial-gradient(900px 600px at 12% 82%, rgba(94, 234, 255, 0.1), transparent 60%),
+    radial-gradient(1200px 700px at 78% 28%, rgba(35, 42, 102, 0.4), transparent 60%),
+    radial-gradient(900px 600px at 12% 82%, rgba(94, 234, 255, 0.08), transparent 60%),
     var(--bg);
   min-height: 100vh;
-}
-[data-theme='daylight'] body {
-  background:
-    radial-gradient(1200px 700px at 78% 28%, rgba(154, 166, 245, 0.5), transparent 60%),
-    radial-gradient(900px 600px at 12% 82%, rgba(10, 143, 176, 0.12), transparent 60%),
-    var(--bg);
 }
 ::selection {
   background: rgba(var(--glow), 0.35);
@@ -149,11 +126,6 @@ main {
   box-shadow:
     0 22px 50px -28px rgba(0, 0, 0, 0.9),
     inset 0 1px 0 rgba(255, 255, 255, 0.06);
-}
-[data-theme='daylight'] .glass {
-  box-shadow:
-    0 22px 50px -30px rgba(30, 40, 120, 0.35),
-    inset 0 1px 0 #fff;
 }
 
 .accent-text {
@@ -337,9 +309,6 @@ h3 {
   color: var(--muted);
   white-space: nowrap;
 }
-[data-theme='daylight'] .pill {
-  background: rgba(20, 30, 80, 0.05);
-}
 .pill-accent {
   border-color: var(--accent-2);
   color: var(--accent-2);
@@ -462,32 +431,6 @@ h3 {
   background: var(--accent);
   box-shadow: 0 0 12px rgba(var(--glow), 0.8);
   transition: width 200ms ease-out;
-}
-
-.theme-switcher {
-  display: flex;
-  gap: 8px;
-}
-.theme-swatch {
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  padding: 0;
-  border: none;
-  background: none;
-  cursor: pointer;
-  position: relative;
-}
-.swatch-fill {
-  display: block;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  border: 1px solid var(--line);
-}
-.theme-swatch.active .swatch-fill {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
 }
 
 /* ---------- drawer ---------- */
@@ -1550,9 +1493,6 @@ h3 {
   border: 1px solid var(--line);
   transition: border-color 180ms, box-shadow 180ms;
 }
-[data-theme='daylight'] .field-shell {
-  background: rgba(20, 30, 80, 0.04);
-}
 .field-shell:focus-within {
   border-color: var(--accent);
   box-shadow: 0 0 0 4px rgba(var(--glow), 0.18);
@@ -1962,9 +1902,6 @@ h3 {
 }
 
 @media (max-width: 559px) {
-  .theme-switcher {
-    display: none;
-  }
   .form-footer {
     flex-direction: column;
   }

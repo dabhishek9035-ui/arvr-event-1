@@ -11,7 +11,7 @@ export type Route = 'home' | 'register';
  * `lib/motion.ts` and must never be stored here.
  */
 interface AppState {
-  themeId: 'holo' | 'daylight';
+  themeId: 'holo';
   quality: QualityTier;
   reducedMotion: boolean;
   xrMode: XrMode;

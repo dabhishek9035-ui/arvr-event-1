@@ -6,7 +6,6 @@ import Header from '@/components/ui/Header';
 import Footer from '@/components/ui/Footer';
 import ScrollEngine from '@/components/ScrollEngine';
 import RouteTracker from '@/components/RouteTracker';
-import ThemeBoot from '@/components/ThemeBoot';
 
 const display = Space_Grotesk({
   subsets: ['latin'],
@@ -29,8 +28,8 @@ const mono = JetBrains_Mono({
   display: 'swap',
 });
 
-/** Sets data-theme from localStorage before first paint — no flash (§4.2). */
-const BOOT = `(function(){try{var t=localStorage.getItem('arvr-theme');if(t!=='daylight'&&t!=='holo')t='holo';document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='holo';}})();`;
+/** Single dark theme — set before first paint (no persisted-theme flash). */
+const BOOT = `(function(){document.documentElement.dataset.theme='holo';})();`;
 
 export const metadata: Metadata = {
   title: 'AR/VR Club · BMSIT&M: Build worlds. Step inside them.',
@@ -51,7 +50,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <SceneShell />
         <RouteTracker />
-        <ThemeBoot />
         <ScrollEngine />
         <a href="#main" className="skip-link">
           Skip to content

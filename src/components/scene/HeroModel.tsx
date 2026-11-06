@@ -16,7 +16,7 @@ import { useStore } from '@/state/store';
  * `heroTarget`; idle float / pointer parallax / scroll spin are added here.
  */
 
-const FIT = 2.4;
+const FIT = 2.8;
 
 class SilentBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
   state = { failed: false };
