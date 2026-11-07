@@ -7,7 +7,7 @@ export const CLUB = {
   tagline: 'Build worlds. Step inside them.',
   nav: [
     { label: 'About', id: 'xr', href: '/#xr' },
-    { label: 'Skill Lab', id: 'skill-lab', href: '/#skill-lab' },
+    { label: 'Workshop', id: 'programme', href: '/#programme' },
     { label: 'Curriculum', id: 'curriculum', href: '/#curriculum' },
     { label: 'Labs', id: 'labs', href: '/#labs' },
   ],

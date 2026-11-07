@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Check, Info } from 'lucide-react';
 import Reveal from '@/components/ui/Reveal';
 import Glass from '@/components/ui/Glass';
-import { SKILLS_PATH, OUTCOMES, PREREQS, PREREQ_NOTE } from '@/content/skillLab';
+import { SKILLS_PATH, OUTCOMES, PREREQS, PREREQ_NOTE } from '@/content/programme';
 import { clamp01 } from '@/lib/motion';
 import { useStore } from '@/state/store';
 

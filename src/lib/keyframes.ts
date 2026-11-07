@@ -30,7 +30,7 @@ const L = (o: Partial<LayerLevels>): LayerLevels => ({
   stars: 1, grid: 0, rings: 0, dial: 0, corr: 0, panels: 0, cycle: 0, dust: 1, progress: 0, ...o,
 });
 
-// 0 hero · 1 xr · 2 skill-lab · (3 curriculum → corridor rig §6.4.2) · 4 labs · 5 method · 6 toolchain · 7 outcomes · 8 join
+// 0 hero · 1 xr · 2 programme · (3 curriculum → corridor rig §6.4.2) · 4 labs · 5 method · 6 toolchain · 7 outcomes · 8 join
 export const KEYS: Keyframe[] = [
   {
     at: 0.5, cam: [0, 0.2, 7.5], look: [0.8, 0, 0],

@@ -2,7 +2,7 @@
 
 /** Home section ids, in scroll order (plan §3). */
 export const SECTION_IDS = [
-  'top', 'xr', 'skill-lab', 'curriculum', 'labs',
+  'top', 'xr', 'programme', 'curriculum', 'labs',
   'method', 'toolchain', 'outcomes', 'join',
 ] as const;
 

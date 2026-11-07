@@ -19,7 +19,7 @@ const CARDS: {
     icon: Glasses,
     sub: 'VR · FULLY IMMERSIVE',
     title: 'Virtual Reality',
-    body: 'A fully digital world that replaces your surroundings. You are inside the experience. This is the main focus of the Skill Lab.',
+    body: 'A fully digital world that replaces your surroundings. You are inside the experience. This is the main focus of the Workshop.',
     focus: true,
   },
   {
@@ -85,7 +85,7 @@ export default function XrIntro() {
                     }
                   }}
                 >
-                  {card.focus ? <span className="pill xr-focus-pill">SKILL LAB FOCUS</span> : null}
+                  {card.focus ? <span className="pill xr-focus-pill">XR FOCUS</span> : null}
                   <span className="icon-chip" data-mode={card.id} aria-hidden="true">
                     <Icon size={24} strokeWidth={1.5} />
                   </span>

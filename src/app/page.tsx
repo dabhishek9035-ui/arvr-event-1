@@ -1,6 +1,6 @@
 import Hero from '@/components/home/Hero';
 import XrIntro from '@/components/home/XrIntro';
-import SkillLab from '@/components/home/SkillLab';
+import Programme from '@/components/home/Programme';
 import Curriculum from '@/components/home/Curriculum';
 import Labs from '@/components/home/Labs';
 import Method from '@/components/home/Method';
@@ -14,7 +14,7 @@ export default function HomePage() {
     <>
       <Hero />
       <XrIntro />
-      <SkillLab />
+      <Programme />
       <Curriculum />
       <Labs />
       <Method />

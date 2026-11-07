@@ -1,6 +1,6 @@
 # AR/VR Hub â€” BMSIT&M
 
-Website for the AR/VR Hub at BMS Institute of Technology and Management. It presents the club's XR Skill Lab and accepts workshop registrations for the two-day, 12-hour event on **19â€“20 November 2026**.
+Website for the AR/VR Hub at BMS Institute of Technology and Management. It presents the club's XR workshop and accepts workshop registrations for the two-day, 12-hour event on **19â€“20 November 2026**.
 
 The home page is a nine-section, scroll-driven story backed by a shared 3D scene. Students register at `/register`; registrations, duplicate checks, and live capacity status are handled through Next.js API routes backed by Supabase.
 
@@ -59,7 +59,7 @@ src/app/                 Next.js routes, global styles, and registration APIs
 src/components/home/     Home page sections
 src/components/register/ Registration flow
 src/components/scene/    Shared React Three Fiber scene and layers
-src/content/skillLab.ts  Workshop copy, curriculum, and module timings
+src/content/programme.ts  Workshop copy, curriculum, and module timings
 src/config/club.ts       Club identity, navigation, and social links
 src/lib/                 Supabase client, validation, motion, and theme helpers
 supabase/schema.sql      Registration table, policies, trigger, and view
@@ -83,6 +83,6 @@ The headset asset is `public/models/headset.glb`. Its provenance and license not
 
 ## Content, styling, and accessibility
 
-Workshop copy and curriculum data live in [`src/content/skillLab.ts`](src/content/skillLab.ts); club identity and social links live in [`src/config/club.ts`](src/config/club.ts). Global design tokens and components are in `src/app/globals.css`.
+Workshop copy and curriculum data live in [`src/content/programme.ts`](src/content/programme.ts); club identity and social links live in [`src/config/club.ts`](src/config/club.ts). Global design tokens and components are in `src/app/globals.css`.
 
 The canvas is decorative and hidden from assistive technology; page content remains in the DOM. The app includes a skip link, keyboard-operable controls, visible focus styles, reduced-motion handling, and fallbacks for unavailable WebGL. The scene quality tier can be cycled with **Alt+Shift+Q**.

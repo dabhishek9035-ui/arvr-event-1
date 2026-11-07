@@ -1,5 +1,5 @@
 /**
- * Canonical content for the XR Skill Lab.
+ * Canonical content for the XR workshop.
  * Single source of truth: Annexure A Version 2 (XR Technology Training
  * Programme for Engineering Students of BMSIT&M). Copy strings exactly.
  * Commercial details (CIN, GST, vendor contacts, prices) are intentionally
@@ -8,12 +8,11 @@
 
 export const PROGRAMME = {
   title: 'XR Technology Training Programme',
-  subtitle: 'A Hands-on Extended Reality Skill Lab',
+  subtitle: 'A Hands-on Extended Reality Workshop',
   institution: 'BMSIT&M, Bangalore',
   durationDays: 2,
   hours: 12,
-  credits: 1,
-  courseType: 'Skill Lab',
+  courseType: 'Workshop',
   primaryPlatform: 'Unity',
   programming: 'C#',
   xrPlatform: 'Meta Quest 3S / Meta Quest 2 / Meta Quest 3',

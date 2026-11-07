@@ -9,7 +9,7 @@ import { useStore } from '@/state/store';
 
 /**
  * L5 Dial (plan §6.3): 12 ticks on a radius-2.6 circle around the hero.
- * Tick i lights when sectionT(skill-lab) ≥ i/12. Billboarded to the camera.
+ * Tick i lights when sectionT(programme) ≥ i/12. Billboarded to the camera.
  */
 
 const R = 2.6;

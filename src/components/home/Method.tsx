@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Reveal from '@/components/ui/Reveal';
-import { METHOD_STEPS, XR_DESIGN } from '@/content/skillLab';
+import { METHOD_STEPS, XR_DESIGN } from '@/content/programme';
 import { scrollToY } from '@/hooks/useLenis';
 import { motion as scrollMotion } from '@/lib/motion';
 import { useStore } from '@/state/store';

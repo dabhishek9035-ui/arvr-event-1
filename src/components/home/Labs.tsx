@@ -2,7 +2,7 @@
 
 import type { PointerEvent } from 'react';
 import Reveal from '@/components/ui/Reveal';
-import { LABS } from '@/content/skillLab';
+import { LABS } from '@/content/programme';
 import { useStore } from '@/state/store';
 
 /** Section 4: Labs (§9.5) — 3×3 grid, pointer tilt + radial glare. */

@@ -35,7 +35,7 @@ export default function Footer() {
         <div className="footer-col">
           <p className="micro footer-label">Explore</p>
           <Link href="/">Home</Link>
-          <Link href="/#skill-lab">Skill Lab</Link>
+          <Link href="/#programme">Workshop</Link>
           <Link href="/#curriculum">Curriculum</Link>
           <Link href="/#labs">Labs</Link>
         </div>
@@ -46,7 +46,7 @@ export default function Footer() {
       </div>
       <div className="container footer-bottom">
         <span>© 2026 AR/VR Hub · BMSIT&amp;M</span>
-        <span>Skill Lab training by Bodyclone Innovations Pvt. Ltd.</span>
+        <span>Workshop training by Bodyclone Innovations Pvt. Ltd.</span>
       </div>
     </footer>
   );

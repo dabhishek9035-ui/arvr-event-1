@@ -2,7 +2,7 @@
 
 import Reveal from '@/components/ui/Reveal';
 import Marquee from '@/components/ui/Marquee';
-import { MARQUEE_A, MARQUEE_B, POSITIONING } from '@/content/skillLab';
+import { MARQUEE_A, MARQUEE_B, POSITIONING } from '@/content/programme';
 
 /** Section 6: Toolchain (§9.7) — two full-bleed marquee rows + positioning. */
 export default function Toolchain() {

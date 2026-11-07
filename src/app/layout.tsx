@@ -36,7 +36,7 @@ const BOOT = `(function(){document.documentElement.dataset.theme='holo';})();`;
 export const metadata: Metadata = {
   title: 'AR/VR Hub · BMSIT&M: Build worlds. Step inside them.',
   description:
-    'AR/VR Hub BMSIT&M — explore Augmented & Virtual Reality. Join the 2-day, 12-hour hands-on XR Skill Lab in Unity, OpenXR and Meta Quest.',
+    'AR/VR Hub BMSIT&M — explore Augmented & Virtual Reality. Join the 2-day, 12-hour hands-on XR workshop in Unity, OpenXR and Meta Quest.',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

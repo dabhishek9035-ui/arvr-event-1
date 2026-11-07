@@ -831,7 +831,7 @@ a.social-link:hover {
   justify-content: center;
   color: var(--accent);
 }
-/* Distinct identities per XR mode: VR cyan (the Skill Lab focus), AR icy blue,
+/* Distinct identities per XR mode: VR cyan (the Workshop focus), AR icy blue,
    MR neutral. */
 .xr-cell:nth-child(1) .icon-chip {
   color: #ffffff;
@@ -903,22 +903,22 @@ a.social-link:hover {
   color: var(--muted);
 }
 /* Section tint like the reference About (#4F21A1/20) */
-.skill-lab-tint {
+.programme-tint {
   background: rgba(79, 33, 161, 0.14);
 }
 .register-page {
   background: rgba(79, 33, 161, 0.1);
 }
 
-/* ---------- skill lab ---------- */
+/* ---------- workshop ---------- */
 
-.skilllab-grid {
+.programme-grid {
   display: grid;
   grid-template-columns: 526fr 636fr;
   gap: 24px;
   align-items: center;
 }
-.skilllab-desc {
+.programme-desc {
   margin-top: 24px;
   font-size: 17px;
   line-height: 1.7;
@@ -2136,7 +2136,7 @@ textarea:-webkit-autofill:active {
 
 @media (max-width: 1279px) {
   .register-grid,
-  .skilllab-grid {
+  .programme-grid {
     gap: 32px;
   }
 }
@@ -2170,7 +2170,7 @@ textarea:-webkit-autofill:active {
   .xr-cards {
     grid-template-columns: 1fr;
   }
-  .skilllab-grid {
+  .programme-grid {
     grid-template-columns: 1fr;
   }
   .register-grid {

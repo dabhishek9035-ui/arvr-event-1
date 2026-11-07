@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { MODULES, type Module } from '@/content/skillLab';
+import { MODULES, type Module } from '@/content/programme';
 import { scrollToY } from '@/hooks/useLenis';
 import { motion as scrollMotion } from '@/lib/motion';
 import { useStore } from '@/state/store';

@@ -58,8 +58,8 @@ export default function Hero() {
             <Button href="/register" size="md">
               Register now
             </Button>
-            <Button href="/#skill-lab" variant="ghost" size="md" arrow={false}>
-              Explore the Skill Lab
+            <Button href="/#programme" variant="ghost" size="md" arrow={false}>
+              Explore the Workshop
             </Button>
           </motion.div>
         </div>

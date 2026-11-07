@@ -5,12 +5,11 @@ import { motion } from 'framer-motion';
 import Reveal from '@/components/ui/Reveal';
 import { useStore } from '@/state/store';
 
-/** Section 2: The Skill Lab (§9.3) — copy + spec sheet with drawing dividers. */
+/** Section 2: The Workshop (§9.3) — copy + spec sheet with drawing dividers. */
 
 const SPEC_ROWS: { label: string; value: ReactNode }[] = [
   { label: 'DURATION', value: '2 days · 12 training hours' },
-  { label: 'CREDITS', value: '1' },
-  { label: 'COURSE TYPE', value: 'Skill Lab' },
+  { label: 'COURSE TYPE', value: 'Workshop' },
   { label: 'PRIMARY PLATFORM', value: 'Unity · C#' },
   { label: 'XR PLATFORM', value: 'Meta Quest 3S / 3 / 2' },
   { label: 'XR FRAMEWORK', value: 'OpenXR · XR Interaction Toolkit' },
@@ -22,13 +21,13 @@ const SPEC_ROWS: { label: string; value: ReactNode }[] = [
   },
 ];
 
-export default function SkillLab() {
+export default function Programme() {
   const reduced = useStore((s) => s.reducedMotion);
 
   return (
-    <section id="skill-lab" data-section="skill-lab" className="section skill-lab-tint skilllab-section">
-      <div className="container skilllab-grid">
-        <div className="skilllab-copy">
+    <section id="programme" data-section="programme" className="section programme-tint programme-section">
+      <div className="container programme-grid">
+        <div className="programme-copy">
           <Reveal delay={0.05}>
             <h2 className="h2">
               Learn it by
@@ -37,8 +36,8 @@ export default function SkillLab() {
             </h2>
           </Reveal>
           <Reveal delay={0.1}>
-            <p className="skilllab-desc">
-              A hands-on Skill Lab in designing and developing Extended Reality applications, with
+            <p className="programme-desc">
+              A hands-on workshop in designing and developing Extended Reality applications, with
               a primary emphasis on Virtual Reality. You&rsquo;ll build immersive 3D environments,
               add spatial interaction and interfaces, deploy to a standalone Meta Quest headset and
               optimise for real-time.
@@ -53,10 +52,6 @@ export default function SkillLab() {
               <div className="numeral-item">
                 <span className="numeral accent-text">12</span>
                 <span className="micro numeral-label">TRAINING HOURS</span>
-              </div>
-              <div className="numeral-item">
-                <span className="numeral accent-text">1</span>
-                <span className="micro numeral-label">CREDIT</span>
               </div>
             </div>
           </Reveal>

@@ -1,6 +1,6 @@
 'use client';
 
-import type { TechItem } from '@/content/skillLab';
+import type { TechItem } from '@/content/programme';
 
 interface MarqueeProps {
   items: TechItem[];
