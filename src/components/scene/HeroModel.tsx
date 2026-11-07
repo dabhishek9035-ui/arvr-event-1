@@ -32,6 +32,7 @@ function Headset() {
   const group = useRef<THREE.Group>(null);
   const keyRef = useRef<THREE.DirectionalLight>(null);
   const rimRef = useRef<THREE.DirectionalLight>(null);
+  const route = useStore((s) => s.route);
   const setModelReady = useStore((s) => s.setModelReady);
   const reduced = useStore((s) => s.reducedMotion);
   const themeId = useStore((s) => s.themeId);
@@ -108,8 +109,11 @@ function Headset() {
     const key = keyRef.current;
     const rim = rimRef.current;
     const lightLevel = pr * load.current;
-    if (key) key.intensity = 1.6 * lightLevel;
-    if (rim) rim.intensity = 2.2 * fx.rimBoost * lightLevel;
+    // Phones on the home page: stronger key + rim so the black headset stays
+    // visible under the lighter hero wash (other pages keep the studio look).
+    const phoneBoost = window.innerWidth < 760 && route === 'home' ? 1.6 : 1;
+    if (key) key.intensity = 1.6 * phoneBoost * lightLevel;
+    if (rim) rim.intensity = 2.2 * phoneBoost * fx.rimBoost * lightLevel;
   });
 
   const theme = THEMES.find((th) => th.id === themeId) ?? THEMES[0];
@@ -117,14 +121,14 @@ function Headset() {
   return (
     <>
       {/* world-fixed studio lighting (not children of the rotating stage) */}
-      <directionalLight ref={keyRef} intensity={1.1} position={[3, 4, 5]} color="#fff1e0" />
+      <directionalLight ref={keyRef} intensity={1.1} position={[3, 4, 5]} color="#e8def8" />
       <directionalLight ref={rimRef} intensity={2.0} position={[-4, 2, -3]}>
         <primitive object={themeColors.rim} attach="color" />
       </directionalLight>
       <Environment key={themeId} frames={1} resolution={256}>
-        <Lightformer intensity={2.2} position={[0, 5, 0]} rotation-x={Math.PI / 2} scale={[10, 10, 1]} />
-        <Lightformer form="rect" intensity={2.6} color={theme.scene.c3} position={[-5, 1, -1]} rotation-y={Math.PI / 2} scale={[8, 2, 1]} />
-        <Lightformer form="rect" intensity={2.0} color={theme.scene.c2} position={[5, 0, -1]} rotation-y={-Math.PI / 2} scale={[8, 2, 1]} />
+        <Lightformer intensity={1.6} position={[0, 5, 0]} rotation-x={Math.PI / 2} scale={[10, 10, 1]} />
+        <Lightformer form="rect" intensity={2.4} color={theme.scene.c3} position={[-5, 1, -1]} rotation-y={Math.PI / 2} scale={[8, 2, 1]} />
+        <Lightformer form="rect" intensity={1.8} color={theme.scene.accent2} position={[5, 0, -1]} rotation-y={-Math.PI / 2} scale={[8, 2, 1]} />
       </Environment>
 
       <group ref={group}>

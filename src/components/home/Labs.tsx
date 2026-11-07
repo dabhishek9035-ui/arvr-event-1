@@ -1,7 +1,6 @@
 'use client';
 
 import type { PointerEvent } from 'react';
-import Eyebrow from '@/components/ui/Eyebrow';
 import Reveal from '@/components/ui/Reveal';
 import { LABS } from '@/content/skillLab';
 import { useStore } from '@/state/store';
@@ -29,9 +28,6 @@ export default function Labs() {
   return (
     <section id="labs" data-section="labs" className="section labs-section">
       <div className="container">
-        <Reveal>
-          <Eyebrow>04 / LABS</Eyebrow>
-        </Reveal>
         <Reveal delay={0.05}>
           <h2 className="h2">
             Nine labs.
@@ -51,8 +47,7 @@ export default function Labs() {
             >
               <article className="lab-card glass" onPointerMove={onMove} onPointerLeave={onLeave}>
                 <div className="lab-top">
-                  <span className="micro lab-num">LAB {String(lab.index).padStart(2, '0')}</span>
-                  <span className="pill">{lab.tag}</span>
+                  <span className={`pill lab-tag-${lab.tag.toLowerCase().replace(' ', '-')}`}>{lab.tag}</span>
                 </div>
                 <h3 className="h3">{lab.title}</h3>
                 <p className="lab-body">{lab.body}</p>

@@ -1,7 +1,6 @@
 'use client';
 
 import { Glasses, ScanLine, Layers } from 'lucide-react';
-import Eyebrow from '@/components/ui/Eyebrow';
 import Reveal from '@/components/ui/Reveal';
 import { useStore, type XrMode } from '@/state/store';
 
@@ -49,9 +48,6 @@ export default function XrIntro() {
     <section id="xr" data-section="xr" className="section xr-section">
       <div className="container">
         <div className="head-col">
-          <Reveal>
-            <Eyebrow>01 / WHAT IS XR</Eyebrow>
-          </Reveal>
           <Reveal delay={0.05}>
             <h2 className="h2">
               Three ways to
@@ -76,7 +72,7 @@ export default function XrIntro() {
                   role="button"
                   tabIndex={0}
                   aria-pressed={pressed}
-                  className={`xr-card glass${pressed ? ' pressed' : ''}`}
+                  className={`xr-card ${card.focus ? 'glass glass-featured' : 'glass'}${pressed ? ' pressed' : ''}`}
                   onMouseEnter={() => setXrMode(card.id)}
                   onMouseLeave={() => setXrMode(null)}
                   onFocus={() => setXrMode(card.id)}
@@ -90,15 +86,12 @@ export default function XrIntro() {
                   }}
                 >
                   {card.focus ? <span className="pill xr-focus-pill">SKILL LAB FOCUS</span> : null}
-                  <span className="icon-chip" aria-hidden="true">
-                    <Icon size={28} strokeWidth={1.5} />
+                  <span className="icon-chip" data-mode={card.id} aria-hidden="true">
+                    <Icon size={24} strokeWidth={1.5} />
                   </span>
                   <p className="micro xr-sub">{card.sub}</p>
                   <h3 className="h3 xr-title">{card.title}</h3>
                   <p className="xr-body">{card.body}</p>
-                  <span className="micro xr-preview" aria-hidden="true">
-                    PREVIEW IN 3D ↗
-                  </span>
                 </div>
               </Reveal>
             );

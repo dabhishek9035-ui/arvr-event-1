@@ -83,7 +83,7 @@ export default function GridFloor() {
     const cam = state.camera.position;
     uniforms.uCam.value.set(cam.x, cam.z);
     uniforms.uOpacity.value = Math.min(1, presence.grid * Math.max(0, fx.gridMul));
-    if (!reduced) {
+    if (!reduced && window.innerWidth >= 760) {
       uniforms.uScroll.value += (0.15 + motion.velocity * 2.2) * dt;
     }
     const mesh2 = mesh.current;

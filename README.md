@@ -1,6 +1,6 @@
-# AR/VR Club · BMSIT&M — XR Skill Lab site
+# AR/VR Hub · BMSIT&M — XR Skill Lab site
 
-A dark, scroll-driven, 3D-backdrop website for the AR/VR Club at BMSIT&M. Its job is to
+A dark, scroll-driven, 3D-backdrop website for AR/VR Hub at BMSIT&M. Its job is to
 fill seats for the **2-day, 12-hour hands-on XR Skill Lab** (19 & 20 November 2026):
 a nine-section scroll story on `/` and a four-step registration form on `/register`.
 
@@ -210,13 +210,13 @@ other abstractions.
 
 - Tokens, type scale, spacing and components live in [`src/app/globals.css`](src/app/globals.css)
   (`--gutter`, `--section-pad`, `--r-*`, `--ease`, the `[data-theme]` block, `.glass`,
-  `.btn`, `.eyebrow`, `.pill`, form fields…).
-- Space Grotesk (display), Manrope (body), JetBrains Mono (micro-labels) via
-  `next/font` — fluid `clamp()` sizes tuned for a 1440×900 reference viewport.
-- **Single dark theme** (`holo`): near-black graphite matched to the black headset,
-  cyan `#5EEAFF` accents. The theme object (`src/lib/themes.ts`) feeds both the CSS
-  variables and the shader colours; adding a theme = adding an entry (light themes must
-  drop additive blending and bloom).
+  `.btn`, `.eyebrow`, `.pill`, form fields…). Visual language matches the club's
+  ARVR-Hub reference: near-black `#0a0a0a` base, purple identity (`#9333ea` primary,
+  `#b48cde` lavender), Orbitron display / Poppins body / JetBrains Mono labels,
+  storm→indigo gradient cards, the hero's black→purple wash with the planet-horizon
+  ellipse, and a purple radial glow behind the footer.
+- **Single dark theme** (`holo`); the theme object (`src/lib/themes.ts`) feeds both the
+  CSS variables and the shader colours; adding a theme = adding an entry.
 - Brand glyph: `public/brand/visor.svg` (also the favicon at `src/app/icon.svg`).
 
 ## Accessibility & performance

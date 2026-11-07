@@ -26,7 +26,7 @@ export default function Scene() {
 
   useEffect(() => {
     scene.background = themeColors.bg; // shared instance, eased every frame
-    const fog = new THREE.FogExp2('#04050D', 0.028);
+    const fog = new THREE.FogExp2('#0a0a0a', 0.028);
     fog.color = themeColors.bg;
     scene.fog = fog;
     return () => {

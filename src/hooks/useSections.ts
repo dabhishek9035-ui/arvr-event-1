@@ -61,6 +61,7 @@ export function computeSectionState(y: number, vh: number, rects: SectionRect[])
   const centre = y + vh / 2;
   let index = 0;
   for (let i = 0; i < rects.length; i++) {
+    if (rects[i].height < 2) continue; // display-hidden on this layout (e.g. toolchain on phones)
     if (centre >= rects[i].top) index = i;
   }
   const r = rects[index] ?? { top: 0, height: 1, pinTop: 0, pinHeight: 1 };

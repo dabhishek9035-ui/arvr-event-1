@@ -3,16 +3,18 @@
 import { useEffect, useRef, useState } from 'react';
 import { FileCheck } from 'lucide-react';
 import { useFormContext } from 'react-hook-form';
+import { CLUB } from '@/config/club';
 import {
   registrationJson,
   registrationSummary,
   type RegistrationData,
   type RegistrationInput,
 } from '@/lib/registration';
+import { WhatsAppIcon } from '@/components/ui/icons';
 
 /**
- * Done state (§10.7): honest "not sent yet" — download / copy / edit.
- * No fake success, no fake IDs.
+ * Done state (§10.7): honest "not sent yet" — WhatsApp group CTA, download /
+ * copy / edit. No fake success, no fake IDs.
  */
 export default function Done({ onEdit }: { onEdit: () => void }) {
   const headingRef = useRef<HTMLHeadingElement>(null);
@@ -56,6 +58,15 @@ export default function Done({ onEdit }: { onEdit: () => void }) {
         This site isn&rsquo;t connected to the workshop&rsquo;s registration system yet, so
         nothing has been sent. Download or copy your details and share them with the organisers.
       </p>
+      <a
+        className="btn btn-whatsapp"
+        href={CLUB.whatsappGroup || '#'}
+        target="_blank"
+        rel="noreferrer"
+      >
+        <WhatsAppIcon size={18} />
+        <span className="btn-label">Join the WhatsApp group</span>
+      </a>
       <div className="done-actions">
         <button type="button" className="btn btn-primary btn-md" onClick={download}>
           <span className="btn-label">Download details (.json)</span>

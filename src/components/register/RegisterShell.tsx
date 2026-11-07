@@ -5,7 +5,6 @@ import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Clock, Glasses, Wrench } from 'lucide-react';
-import Eyebrow from '@/components/ui/Eyebrow';
 import {
   registrationSchema,
   DEFAULT_REGISTRATION,
@@ -83,9 +82,14 @@ export default function RegisterShell() {
   };
 
   const onValidSubmit = useCallback((data: RegistrationInput) => {
-    // §10.7 — THE SEAM. Replace this body with the network call when a
-    // backend exists, and map `status` to submitting | sent | error.
-    void data;
+    // ── BACKEND INTEGRATION POINT ────────────────────────────────────────
+    // `data` is the validated, JSON-serializable payload (shape:
+    // RegistrationData from src/lib/registration.ts). To integrate:
+    //   1. POST it to the club endpoint, e.g.
+    //        fetch('/api/register', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
+    //   2. On success:  clearDraft(); setStatus('ready');
+    //   3. On failure:  surface an 'error' status with a retry in Done.tsx.
+    // Until the endpoint exists, the honest local flow below stands.
     clearDraft();
     setStatus('ready');
   }, []);
@@ -124,7 +128,6 @@ export default function RegisterShell() {
 export function RegisterIntro() {
   return (
     <div className="register-intro">
-      <Eyebrow>REGISTER</Eyebrow>
       <h1 className="register-h1">
         Register for the
         <br />

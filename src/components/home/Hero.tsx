@@ -35,20 +35,19 @@ export default function Hero() {
 
   return (
     <section id="top" data-section="top" className="section hero" aria-label="Introduction">
+      <div className="hero-scrim" aria-hidden="true" />
+      <div className="hero-planet" aria-hidden="true" />
       <div className="container hero-inner">
         <div className="hero-copy">
-          <motion.p className="eyebrow" {...enter(0)}>
-            AR/VR CLUB · BMSIT&amp;M
-          </motion.p>
           <motion.h1 className="display-xl hero-h1" {...enter(1)}>
             <span>Build worlds.</span>
             <span className="accent-text">Step inside them.</span>
           </motion.h1>
-          <motion.p className="lead hero-lead" {...enter(2)}>
+          <motion.p className="lead hero-lead" {...enter(1)}>
             A student club for people who make immersive things. Unity, OpenXR and Meta Quest,
             learned by building.
           </motion.p>
-          <motion.div className="hero-cta" {...enter(3)}>
+          <motion.div className="hero-cta" {...enter(2)}>
             <Button href="/register" size="md">
               Register now
             </Button>
@@ -58,7 +57,7 @@ export default function Hero() {
           </motion.div>
         </div>
       </div>
-      <motion.div className="stat-strip" {...enter(4)}>
+      <motion.div className="stat-strip" {...enter(3)}>
         {STATS.map((s) => (
           <div className="stat" key={s.label}>
             <span className="stat-value">{s.value}</span>
@@ -66,12 +65,6 @@ export default function Hero() {
           </div>
         ))}
       </motion.div>
-      <div className={`scroll-cue${past ? ' hidden' : ''}`} aria-hidden="true">
-        <span className="scroll-cue-line">
-          <span className="scroll-cue-dot" />
-        </span>
-        <span className="scroll-cue-label">SCROLL</span>
-      </div>
     </section>
   );
 }

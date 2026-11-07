@@ -1,6 +1,5 @@
 'use client';
 
-import Eyebrow from '@/components/ui/Eyebrow';
 import Reveal from '@/components/ui/Reveal';
 import Button from '@/components/ui/Button';
 
@@ -9,9 +8,6 @@ export default function Join() {
   return (
     <section id="join" data-section="join" className="section join-section">
       <div className="container join-inner">
-        <Reveal>
-          <Eyebrow>08 / JOIN</Eyebrow>
-        </Reveal>
         <Reveal delay={0.05}>
           <h2 className="display-lg join-h2">
             Your first world

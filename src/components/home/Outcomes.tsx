@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { Check, Info } from 'lucide-react';
-import Eyebrow from '@/components/ui/Eyebrow';
 import Reveal from '@/components/ui/Reveal';
 import Glass from '@/components/ui/Glass';
 import { SKILLS_PATH, OUTCOMES, PREREQS, PREREQ_NOTE } from '@/content/skillLab';
@@ -125,15 +124,18 @@ export default function Outcomes() {
   return (
     <section id="outcomes" data-section="outcomes" className="section outcomes-section">
       <div className="container">
-        <Reveal>
-          <Eyebrow>07 / OUTCOMES</Eyebrow>
-        </Reveal>
         <Reveal delay={0.05}>
           <h2 className="h2">
-            What you&rsquo;ll do
+            The skills you
             <br />
-            <span className="accent-text">on your own.</span>
+            <span className="accent-text">walk away with.</span>
           </h2>
+        </Reveal>
+        <Reveal delay={0.1}>
+          <p className="lead">
+            You build every step hands-on during the two days — nothing to set up
+            beforehand, and all of it is yours to reuse after the event.
+          </p>
         </Reveal>
         <div className="skills-path-wrap">
           <SkillsPathSvg />

@@ -90,7 +90,7 @@ export default function Backdrop() {
   useFrame((state) => {
     uniforms.uTime.value = reduced ? 0 : state.clock.elapsedTime;
     uniforms.uBright.value = fx.bright;
-    uniforms.uWarp.value = theme.scene.warp * fx.warpMul;
+    uniforms.uWarp.value = window.innerWidth < 760 ? 0 : theme.scene.warp * fx.warpMul;
   });
 
   return (

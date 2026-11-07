@@ -2,7 +2,6 @@
 
 import type { ReactNode } from 'react';
 import { motion } from 'framer-motion';
-import Eyebrow from '@/components/ui/Eyebrow';
 import Reveal from '@/components/ui/Reveal';
 import { useStore } from '@/state/store';
 
@@ -27,12 +26,9 @@ export default function SkillLab() {
   const reduced = useStore((s) => s.reducedMotion);
 
   return (
-    <section id="skill-lab" data-section="skill-lab" className="section skilllab-section">
+    <section id="skill-lab" data-section="skill-lab" className="section skill-lab-tint skilllab-section">
       <div className="container skilllab-grid">
         <div className="skilllab-copy">
-          <Reveal>
-            <Eyebrow>02 / THE SKILL LAB</Eyebrow>
-          </Reveal>
           <Reveal delay={0.05}>
             <h2 className="h2">
               Learn it by
@@ -67,10 +63,6 @@ export default function SkillLab() {
         </div>
         <Reveal delay={0.1} className="spec-wrap">
           <div className="spec-panel glass">
-            <div className="spec-head">
-              <span className="micro">SPEC SHEET</span>
-              <span className="micro spec-head-right">XR SKILL LAB</span>
-            </div>
             <div className="spec-rows">
               {SPEC_ROWS.map((row, i) => (
                 <div className="spec-row" key={row.label}>

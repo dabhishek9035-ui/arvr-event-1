@@ -1,6 +1,5 @@
 'use client';
 
-import Eyebrow from '@/components/ui/Eyebrow';
 import Reveal from '@/components/ui/Reveal';
 import Marquee from '@/components/ui/Marquee';
 import { MARQUEE_A, MARQUEE_B, POSITIONING } from '@/content/skillLab';
@@ -10,9 +9,6 @@ export default function Toolchain() {
   return (
     <section id="toolchain" data-section="toolchain" className="section toolchain-section">
       <div className="container">
-        <Reveal>
-          <Eyebrow>06 / TOOLCHAIN</Eyebrow>
-        </Reveal>
         <Reveal delay={0.05}>
           <h2 className="h2">
             The stack you&rsquo;ll

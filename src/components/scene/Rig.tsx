@@ -67,6 +67,16 @@ export default function Rig() {
     presenceT.dust = key.L.dust;
     presenceT.progress = key.L.progress;
 
+    // Phones: minimalist background — content-tied layers stay, decoration goes
+    if (mobile) {
+      presenceT.stars = 0;
+      presenceT.dust = 0;
+      presenceT.rings = 0;
+      presenceT.panels = 0;
+      presenceT.grid = Math.min(presenceT.grid, 0.35);
+      fxT.warpMul = 0;
+    }
+
     for (const k of PRESENCE_KEYS) presence[k] = damp(presence[k], presenceT[k], dt, 3);
 
     // ---- fx targets from XR-mode preview (§6.6) and register progress (§10.2)

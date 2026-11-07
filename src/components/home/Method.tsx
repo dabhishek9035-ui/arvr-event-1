@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
-import Eyebrow from '@/components/ui/Eyebrow';
 import Reveal from '@/components/ui/Reveal';
 import { METHOD_STEPS, XR_DESIGN } from '@/content/skillLab';
 import { scrollToY } from '@/hooks/useLenis';
@@ -84,10 +83,9 @@ export default function Method() {
   return (
     <section id="method" data-section="method" className="section method-section">
       {pinned ? (
-        <div className="method-pin" ref={pinRef} style={{ height: '400vh' }}>
+        <div className="method-pin" ref={pinRef} style={{ height: '320vh' }}>
           <div className="method-sticky">
             <div className="container method-copy">
-              <Eyebrow>05 / METHOD</Eyebrow>
               <h2 className="h2">
                 Six steps.
                 <br />
@@ -111,14 +109,10 @@ export default function Method() {
                 ))}
               </div>
             </div>
-            <span className="micro method-counter">
-              STEP {String(active + 1).padStart(2, '0')} / 06
-            </span>
           </div>
         </div>
       ) : (
         <div className="container">
-          <Eyebrow>05 / METHOD</Eyebrow>
           <h2 className="h2">
             Six steps.
             <br />

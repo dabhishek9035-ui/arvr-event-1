@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import Eyebrow from '@/components/ui/Eyebrow';
 import { MODULES, type Module } from '@/content/skillLab';
 import { motion as scrollMotion } from '@/lib/motion';
 import { useStore } from '@/state/store';
@@ -15,7 +14,6 @@ import { useStore } from '@/state/store';
 function Head() {
   return (
     <div className="curriculum-head">
-      <Eyebrow>03 / CURRICULUM</Eyebrow>
       <h2 className="h2">
         Nine modules.
         <br />
@@ -35,7 +33,6 @@ function Card({ m, active }: { m: Module; active: boolean }) {
       </span>
       <h3 className="h3-lg module-title">{m.title}</h3>
       <p className="module-blurb">{m.blurb}</p>
-      <span className="micro module-index">MODULE {m.roman} / IX</span>
     </article>
   );
 }

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Space_Grotesk, Manrope, JetBrains_Mono } from 'next/font/google';
+import { Unbounded, Figtree, IBM_Plex_Mono } from 'next/font/google';
 import './globals.css';
 import SceneShell from '@/components/scene/SceneShell';
 import Header from '@/components/ui/Header';
@@ -7,24 +7,24 @@ import Footer from '@/components/ui/Footer';
 import ScrollEngine from '@/components/ScrollEngine';
 import RouteTracker from '@/components/RouteTracker';
 
-const display = Space_Grotesk({
+const display = Unbounded({
   subsets: ['latin'],
-  weight: ['500', '600'],
-  variable: '--font-space-grotesk',
+  weight: ['400', '500', '700'],
+  variable: '--font-display-src',
   display: 'swap',
 });
 
-const body = Manrope({
+const body = Figtree({
   subsets: ['latin'],
   weight: ['400', '500', '600'],
-  variable: '--font-manrope',
+  variable: '--font-body-src',
   display: 'swap',
 });
 
-const mono = JetBrains_Mono({
+const mono = IBM_Plex_Mono({
   subsets: ['latin'],
   weight: ['400', '500'],
-  variable: '--font-jetbrains',
+  variable: '--font-mono-src',
   display: 'swap',
 });
 
@@ -32,9 +32,9 @@ const mono = JetBrains_Mono({
 const BOOT = `(function(){document.documentElement.dataset.theme='holo';})();`;
 
 export const metadata: Metadata = {
-  title: 'AR/VR Club · BMSIT&M: Build worlds. Step inside them.',
+  title: 'AR/VR Hub · BMSIT&M: Build worlds. Step inside them.',
   description:
-    'A student AR/VR club at BMSIT&M. Join the 2-day, 12-hour XR Skill Lab in Unity, OpenXR and Meta Quest.',
+    'AR/VR Hub BMSIT&M — explore Augmented & Virtual Reality. Join the 2-day, 12-hour hands-on XR Skill Lab in Unity, OpenXR and Meta Quest.',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

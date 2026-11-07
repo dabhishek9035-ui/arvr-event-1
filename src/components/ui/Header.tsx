@@ -6,7 +6,6 @@ import { useEffect, useRef, useState } from 'react';
 import { Menu } from 'lucide-react';
 import { CLUB } from '@/config/club';
 import { useStore } from '@/state/store';
-import VisorGlyph from './VisorGlyph';
 import LoadBar from './LoadBar';
 import Drawer from './Drawer';
 
@@ -30,11 +29,11 @@ export default function Header() {
     <>
       <header className={`site-header${scrolled ? ' scrolled' : ''}`}>
         <div className="header-inner">
-          <Link href="/" className="brand" aria-label="AR/VR Club home">
-            <VisorGlyph size={32} />
+          <Link href="/" className="brand" aria-label="AR/VR Hub — BMSIT&M home">
+            <img src={CLUB.logo} alt="AR/VR Hub logo" className="brand-logo" width={44} height={44} />
             <span className="brand-text">
-              <span className="brand-name">AR/VR CLUB</span>
-              <span className="brand-inst">BMSIT&amp;M</span>
+              <span className="brand-name">{CLUB.name}</span>
+              <span className="brand-inst">{CLUB.institution}</span>
             </span>
           </Link>
           <nav className="main-nav" aria-label="Primary">
