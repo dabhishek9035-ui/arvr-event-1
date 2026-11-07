@@ -7,10 +7,9 @@ import { useStore } from '@/state/store';
 
 /** Section 0: Hero (§9.1). H1 renders as real text immediately (LCP). */
 
-const STATS = [
-  { value: '2', label: 'DAYS' },
+const STATS: { value: string; label: string; highlight?: boolean }[] = [
+  { value: '19th & 20th', label: 'NOV', highlight: true },
   { value: '12', label: 'HANDS-ON HOURS' },
-  { value: '9', label: 'LABS' },
   { value: 'Quest', label: 'META HEADSETS' },
 ];
 
@@ -67,7 +66,9 @@ export default function Hero() {
       <motion.div className="stat-strip" {...enter(3)}>
         {STATS.map((s) => (
           <div className="stat" key={s.label}>
-            <span className="stat-value">{s.value}</span>
+            <span className={`stat-value${s.highlight ? ' stat-date-value' : ''}`}>
+              {s.value}
+            </span>
             <span className="micro stat-label">{s.label}</span>
           </div>
         ))}

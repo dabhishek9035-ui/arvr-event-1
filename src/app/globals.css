@@ -717,6 +717,12 @@ a.social-link:hover {
 .stat-value {
   font: 700 26px var(--font-display);
 }
+.stat-date-value {
+  color: #ffffff;
+  font-size: clamp(24px, 2vw, 29px);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+  white-space: nowrap;
+}
 .stat-label {
   color: var(--muted);
 }
@@ -2241,6 +2247,9 @@ textarea:-webkit-autofill:active {
   }
   .stat-value {
     font-size: 22px;
+  }
+  .stat-date-value {
+    font-size: clamp(16px, 4.5vw, 20px);
   }
   .scroll-cue {
     display: none;
