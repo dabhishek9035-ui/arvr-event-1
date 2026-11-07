@@ -6,6 +6,8 @@ import Header from '@/components/ui/Header';
 import Footer from '@/components/ui/Footer';
 import ScrollEngine from '@/components/ScrollEngine';
 import RouteTracker from '@/components/RouteTracker';
+import CopyPasteGuard from '@/components/CopyPasteGuard';
+import CometCursor from '@/components/ui/CometCursor';
 
 const display = Unbounded({
   subsets: ['latin'],
@@ -48,6 +50,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: BOOT }} />
       </head>
       <body>
+        <CopyPasteGuard />
+        <CometCursor />
         <SceneShell />
         <RouteTracker />
         <ScrollEngine />

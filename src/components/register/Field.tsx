@@ -2,12 +2,7 @@
 
 import { CircleAlert, Check } from 'lucide-react';
 import { useFormContext, useWatch, type FieldPath } from 'react-hook-form';
-import type { RegistrationInput } from '@/lib/registration';
-
-/**
- * Floating-label field (§10.4). NO placeholder text — the float is driven by
- * an empty `placeholder=" "` + :placeholder-shown (draft restores float too).
- */
+import { countWords, type RegistrationInput } from '@/lib/registration';
 
 interface FieldProps {
   name: FieldPath<RegistrationInput>;
@@ -16,7 +11,7 @@ interface FieldProps {
   helper?: string;
   prefix?: string;
   autoComplete?: string;
-  inputMode?: 'numeric' | 'text' | 'email' | 'tel';
+  inputMode?: 'numeric' | 'text' | 'email' | 'tel' | 'url';
   uppercaseOnBlur?: boolean;
 }
 
@@ -55,6 +50,7 @@ export default function Field({
           autoComplete={autoComplete}
           className="field-input"
           placeholder=" "
+          style={{ backgroundColor: 'transparent', color: 'var(--text)' }}
           aria-invalid={error ? true : undefined}
           aria-describedby={error ? `f-${name}-error` : helper ? `f-${name}-helper` : undefined}
           {...reg}
@@ -84,42 +80,82 @@ export default function Field({
   );
 }
 
-interface TextAreaProps {
+interface WordTextAreaProps {
   name: FieldPath<RegistrationInput>;
-  label: string;
-  max: number;
+  questionTitle?: string;
+  label?: string;
+  maxWords: number;
+  helper?: string;
 }
 
-export function TextAreaField({ name, label, max }: TextAreaProps) {
+export function WordTextAreaField({
+  name,
+  questionTitle,
+  label,
+  maxWords,
+  helper,
+}: WordTextAreaProps) {
   const { register, getFieldState, formState } = useFormContext<RegistrationInput>();
   const { error } = getFieldState(name, formState);
   const value = (useWatch({ name: name as never }) as unknown as string) ?? '';
-  const over = value.length > max;
+  const currentWords = countWords(value);
+  const over = currentWords > maxWords;
   const reg = register(name);
 
   return (
     <div className={`field${error ? ' has-error' : ''}`}>
+      {questionTitle ? (
+        <div style={{ marginBottom: '8px' }}>
+          <p className="choice-legend" style={{ margin: '0 0 4px 0' }}>
+            {questionTitle}
+          </p>
+          {helper ? <p className="choice-helper">{helper}</p> : null}
+        </div>
+      ) : null}
+
       <div className="field-shell area-shell">
         <textarea
           id={`f-${name}`}
           className="field-input area-input"
-          placeholder=" "
+          placeholder={questionTitle ? 'Type your response here...' : ' '}
           rows={4}
+          style={{ backgroundColor: 'transparent', color: 'var(--text)' }}
           aria-invalid={error ? true : undefined}
           {...reg}
         />
-        <label className="field-label" htmlFor={`f-${name}`}>
-          {label}
-        </label>
+        {label && !questionTitle ? (
+          <label className="field-label" htmlFor={`f-${name}`}>
+            {label}
+          </label>
+        ) : null}
       </div>
-      <div className="area-meta">
-        {error?.message ? (
-          <FieldError message={error.message} />
-        ) : (
-          <span className="field-helper">Optional — tell the organisers why you want in.</span>
-        )}
-        <span className={`area-counter${over ? ' over' : ''}`} aria-hidden="true">
-          {value.length} / {max}
+
+      <div
+        className="area-meta"
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginTop: '6px',
+        }}
+      >
+        <div>
+          {error?.message ? (
+            <FieldError message={error.message} />
+          ) : !questionTitle && helper ? (
+            <span className="field-helper">{helper}</span>
+          ) : null}
+        </div>
+        <span
+          className={`area-counter${over ? ' over' : ''}`}
+          style={{
+            color: over ? 'var(--danger)' : 'var(--muted)',
+            fontSize: '13px',
+            fontFamily: 'var(--font-mono)',
+          }}
+          aria-hidden="true"
+        >
+          {currentWords} / {maxWords} words
         </span>
       </div>
     </div>

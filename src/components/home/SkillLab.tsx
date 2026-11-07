@@ -63,6 +63,10 @@ export default function SkillLab() {
         </div>
         <Reveal delay={0.1} className="spec-wrap">
           <div className="spec-panel glass">
+            <div className="spec-head">
+              <span className="micro">COURSE SPECIFICATIONS</span>
+              <span className="micro spec-head-right">ANNEXURE A // VERIFIED</span>
+            </div>
             <div className="spec-rows">
               {SPEC_ROWS.map((row, i) => (
                 <div className="spec-row" key={row.label}>

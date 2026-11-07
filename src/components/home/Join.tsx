@@ -17,7 +17,7 @@ export default function Join() {
         </Reveal>
         <Reveal delay={0.1}>
           <p className="lead join-lead">
-            The Skill Lab runs on 19 &amp; 20 November 2026. Register now to save your seat.
+            The workshop runs on 19 &amp; 20 November 2026. Registrations are capped at 100 members — 40 will be shortlisted.
           </p>
         </Reveal>
         <Reveal delay={0.15}>
@@ -26,7 +26,7 @@ export default function Join() {
           </Button>
         </Reveal>
         <Reveal delay={0.2}>
-          <p className="micro join-meta">19–20 NOVEMBER 2026 · TWO DAYS · TWELVE HOURS · META QUEST</p>
+          <p className="micro join-meta">CAPPED TO 100 REGISTRATIONS · 40 SHORTLISTED · 19–20 NOVEMBER 2026</p>
         </Reveal>
       </div>
     </section>

@@ -1,77 +1,183 @@
 import { z } from 'zod';
 
-/** Choice data (plan §10.5). */
+/** Branch choices per requirement */
 export const BRANCHES = [
-  'Computer Science',
-  'Information Science',
-  'AI & ML',
-  'Electronics & Communication',
-  'Electrical & Electronics',
-  'Mechanical',
-  'Civil',
-  'Other',
+  'CSE',
+  'AIML',
+  'ECE',
+  'EEE',
+  'MECHANICAL',
+  'CIVIL',
+  'ISE',
 ] as const;
 
-export const YEARS = ['1st', '2nd', '3rd', '4th'] as const;
-export const EXPERIENCE_LEVELS = ['None yet', 'Some', 'Comfortable'] as const;
-export const PROGRAMMING_LEVELS = ['Basic', 'Intermediate', 'Advanced'] as const;
-export const INTERESTS = ['Engineering', 'Creative', 'Industrial', 'Educational', 'Games', 'Other'] as const;
+/** Semester choices (only from 3-8 sems) */
+export const SEMESTERS = ['3', '4', '5', '6', '7', '8'] as const;
 
-/** Full registration schema (workshop only). Error strings are exact per plan §10.5. */
+/** Prior experience question options */
+export const PRIOR_EXPERIENCE_OPTIONS = [
+  'No experience, but interested',
+  'Worked on small projects',
+  'Basic knowledge',
+  'Substantial experience',
+] as const;
+
+/** Areas of interest options */
+export const EXPLORATION_INTERESTS = [
+  'Augmented Reality (AR)',
+  'Extended Reality (XR)',
+  'Unity / Unreal Engine',
+  'Virtual Reality (VR)',
+  '3D Modelling and Design',
+  'Game Development',
+  "I'm exploring Everything",
+] as const;
+
+/** Laptop specification options */
+export const LAPTOP_SPECS_OPTIONS = [
+  'Yes, I have a laptop with the required specs',
+  'No, I do not have a laptop with the required specs',
+] as const;
+
+/** Count words in text helper */
+export function countWords(str: string): number {
+  if (!str) return 0;
+  return str.trim().split(/\s+/).filter(Boolean).length;
+}
+
+/** URL cleanup helper */
+function normalizeUrl(val: string): string {
+  const trimmed = val.trim();
+  if (!trimmed) return '';
+  if (/^https?:\/\//i.test(trimmed)) return trimmed;
+  return `https://${trimmed}`;
+}
+
+/** Full registration schema */
 export const registrationSchema = z.object({
-  fullName: z.string().trim().min(2, 'Enter your full name.').max(80, 'Enter your full name.'),
-  email: z.string().trim().toLowerCase().email('Enter a valid email address.'),
+  fullName: z
+    .string()
+    .trim()
+    .min(2, 'Enter your full name.')
+    .max(80, 'Full name is too long.'),
+  email: z
+    .string()
+    .trim()
+    .toLowerCase()
+    .email('Enter a valid email address.'),
   phone: z
     .string()
     .transform((v) => v.replace(/[\s-]/g, ''))
-    .pipe(z.string().regex(/^[6-9]\d{9}$/, 'Enter a 10-digit mobile number.')),
-  institution: z.string().trim().min(2, 'Enter your college or institution.').max(120, 'Enter your college or institution.'),
-  usn: z.string().trim().regex(/^[A-Za-z0-9-]{5,20}$/, 'Enter your USN or student ID.'),
-  branch: z.string().min(1, 'Select your branch.'),
-  year: z.string().min(1, 'Select your year.'),
-  experience: z.string().min(1, 'Select one.'),
-  programming: z.string().min(1, 'Select one.'),
-  interests: z.array(z.string()).default([]),
-  reason: z.string().max(400, 'Keep it under 400 characters.').default(''),
-  consent: z.boolean().refine((v) => v === true, { message: 'Please accept to continue.' }),
+    .pipe(z.string().regex(/^[6-9]\d{9}$/, 'Enter a valid 10-digit mobile number.')),
+  githubUrl: z
+    .string()
+    .trim()
+    .min(3, 'Enter your GitHub profile link.')
+    .transform(normalizeUrl)
+    .refine(
+      (u) => {
+        try {
+          const url = new URL(u);
+          return url.hostname.includes('github.com');
+        } catch {
+          return false;
+        }
+      },
+      { message: 'Enter a valid GitHub URL (e.g. https://github.com/your-username).' }
+    ),
+  linkedinUrl: z
+    .string()
+    .trim()
+    .min(3, 'Enter your LinkedIn profile link.')
+    .transform(normalizeUrl)
+    .refine(
+      (u) => {
+        try {
+          const url = new URL(u);
+          return url.hostname.includes('linkedin.com');
+        } catch {
+          return false;
+        }
+      },
+      { message: 'Enter a valid LinkedIn URL (e.g. https://linkedin.com/in/your-profile).' }
+    ),
+  usn: z
+    .string()
+    .trim()
+    .min(4, 'Enter your USN.')
+    .max(20, 'USN is too long.')
+    .regex(/^[A-Za-z0-9-]{4,20}$/, 'Enter a valid USN (e.g. 1BY21CS001).'),
+  branch: z.enum(BRANCHES, {
+    errorMap: () => ({ message: 'Select your branch from the list.' }),
+  }),
+  semester: z.enum(SEMESTERS, {
+    errorMap: () => ({ message: 'Select your semester (3 to 8).' }),
+  }),
+  section: z
+    .string()
+    .trim()
+    .min(1, 'Enter your section (e.g. A, B, C).')
+    .max(10, 'Section is too long.'),
+  priorExperience: z
+    .string()
+    .min(1, 'Please select your prior experience level.'),
+  whyAttend: z
+    .string()
+    .trim()
+    .min(10, 'Please write at least a sentence explaining why you want to attend.')
+    .refine(
+      (text) => countWords(text) <= 100,
+      { message: 'Your answer must be maximum 100 words.' }
+    ),
+  interests: z
+    .array(z.string())
+    .min(1, 'Select at least one area you want to explore.'),
+  laptopSpecs: z
+    .string()
+    .min(1, 'Please confirm your laptop specifications.'),
+  consent: z.boolean().refine((v) => v === true, {
+    message: 'Please confirm your details to continue.',
+  }),
 });
 
 export type RegistrationInput = z.input<typeof registrationSchema>;
 export type RegistrationData = z.output<typeof registrationSchema>;
 
-/** Field names validated per step; step 4 (review) has no fields. */
-export const STEP_FIELDS: string[][] = [
-  ['fullName', 'email', 'phone'],
-  ['institution', 'usn', 'branch', 'year'],
-  ['experience', 'programming', 'interests', 'reason', 'consent'],
+/** Field names validated per step */
+export const STEP_FIELDS: (keyof RegistrationInput)[][] = [
+  ['fullName', 'email', 'phone', 'githubUrl', 'linkedinUrl'],
+  ['usn', 'branch', 'semester', 'section'],
+  ['priorExperience', 'whyAttend', 'interests', 'laptopSpecs', 'consent'],
   [],
 ];
 
-export const STEP_LABELS = ['01 YOU', '02 CAMPUS', '03 INTEREST', '04 REVIEW'] as const;
+export const STEP_LABELS = ['01 YOU', '02 CAMPUS', '03 QUESTIONS', '04 REVIEW'] as const;
 
 export const DEFAULT_REGISTRATION: RegistrationInput = {
   fullName: '',
   email: '',
   phone: '',
-  institution: 'BMSIT&M',
+  githubUrl: '',
+  linkedinUrl: '',
   usn: '',
-  branch: '',
-  year: '',
-  experience: '',
-  programming: '',
+  branch: 'CSE',
+  semester: '3',
+  section: '',
+  priorExperience: '',
+  whyAttend: '',
   interests: [],
-  reason: '',
+  laptopSpecs: '',
   consent: false,
 };
 
-export const DRAFT_KEY = 'arvr-register-draft';
+export const DRAFT_KEY = 'arvr-register-draft-v2';
 
 export function loadDraft(): RegistrationInput | null {
   try {
     const raw = sessionStorage.getItem(DRAFT_KEY);
     if (!raw) return null;
     const parsed = JSON.parse(raw) as Partial<RegistrationInput>;
-    return { ...DEFAULT_REGISTRATION, ...parsed, consent: false }; // consent is never persisted
+    return { ...DEFAULT_REGISTRATION, ...parsed, consent: false };
   } catch {
     return null;
   }
@@ -100,24 +206,22 @@ export function registrationJson(data: RegistrationData): string {
 
 export function registrationSummary(data: RegistrationData): string {
   return [
-    'XR Skill Lab — Registration details',
+    'AR/VR Hub — Registration Details',
+    '================================',
+    'Full Name: ' + data.fullName,
+    'USN: ' + data.usn,
+    'Email: ' + data.email,
+    'Mobile: +91 ' + data.phone,
+    'Section: ' + data.section,
+    'Semester: ' + data.semester,
+    'Branch: ' + data.branch,
+    'GitHub: ' + data.githubUrl,
+    'LinkedIn: ' + data.linkedinUrl,
     '',
-    '— You —',
-    `Full name: ${data.fullName}`,
-    `Email: ${data.email}`,
-    `Mobile: +91 ${data.phone}`,
-    '',
-    '— Campus —',
-    `Institution: ${data.institution}`,
-    `USN / Student ID: ${data.usn}`,
-    `Branch: ${data.branch}`,
-    `Year of study: ${data.year}`,
-    '',
-    '— Interest —',
-    `Experience with Unity / VR / 3D: ${data.experience}`,
-    `Programming comfort: ${data.programming}`,
-    `XR applications that excite you: ${data.interests.length ? data.interests.join(', ') : '—'}`,
-    `Why do you want to join?: ${data.reason || '—'}`,
-    `Consent given: yes`,
+    'Questions:',
+    '- Prior Experience: ' + data.priorExperience,
+    '- Reason to Attend: ' + data.whyAttend,
+    '- Interested In: ' + (data.interests.join(', ') || '—'),
+    '- Laptop Specs: ' + data.laptopSpecs,
   ].join('\n');
 }

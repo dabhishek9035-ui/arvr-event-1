@@ -89,7 +89,12 @@ export default function XrIntro() {
                   <span className="icon-chip" data-mode={card.id} aria-hidden="true">
                     <Icon size={24} strokeWidth={1.5} />
                   </span>
-                  <p className="micro xr-sub">{card.sub}</p>
+                  <div className="xr-card-meta">
+                    <p className="micro xr-sub">{card.sub}</p>
+                    <span className={`micro xr-indicator${pressed ? ' active' : ''}`} aria-hidden="true">
+                      {pressed ? '● 3D LINKED' : 'HOVER PREVIEW'}
+                    </span>
+                  </div>
                   <h3 className="h3 xr-title">{card.title}</h3>
                   <p className="xr-body">{card.body}</p>
                 </div>

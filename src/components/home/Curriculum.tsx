@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { MODULES, type Module } from '@/content/skillLab';
+import { scrollToY } from '@/hooks/useLenis';
 import { motion as scrollMotion } from '@/lib/motion';
 import { useStore } from '@/state/store';
 
@@ -23,11 +24,30 @@ function Head() {
   );
 }
 
-function Card({ m, active }: { m: Module; active: boolean }) {
+function Card({ m, active, onSelect }: { m: Module; active: boolean; onSelect?: () => void }) {
   const hrs = Number.isInteger(m.hours) ? `${m.hours}` : m.hours.toFixed(1);
   return (
-    <article className={`module-card glass${active ? ' active' : ''}`}>
-      <span className="pill module-hours">{hrs} HRS</span>
+    <article
+      className={`module-card glass${active ? ' active' : ''}`}
+      onClick={onSelect}
+      style={{ cursor: onSelect ? 'pointer' : 'default' }}
+      role={onSelect ? 'button' : undefined}
+      tabIndex={onSelect ? 0 : undefined}
+      onKeyDown={
+        onSelect
+          ? (e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                onSelect();
+              }
+            }
+          : undefined
+      }
+    >
+      <div className="module-top">
+        <span className="pill module-hours">{hrs} HRS</span>
+        <span className="micro module-index">MODULE {String(m.index).padStart(2, '0')}</span>
+      </div>
       <span className="module-numeral" aria-hidden="true">
         {m.roman}
       </span>
@@ -43,6 +63,7 @@ export default function Curriculum() {
 
   const [travel, setTravel] = useState(0);
   const [active, setActive] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const barRef = useRef<HTMLDivElement>(null);
 
@@ -85,6 +106,15 @@ export default function Curriculum() {
     return () => cancelAnimationFrame(raf);
   }, [pinned, travel]);
 
+  const jumpToModule = (idx: number) => {
+    if (!pinned) return;
+    const el = sectionRef.current;
+    if (!el) return;
+    const top = el.getBoundingClientRect().top + window.scrollY;
+    const fraction = idx / Math.max(1, MODULES.length - 1);
+    scrollToY(top + fraction * travel);
+  };
+
   if (!pinned) {
     return (
       <section id="curriculum" data-section="curriculum" className="section curriculum-section stacked">
@@ -105,6 +135,7 @@ export default function Curriculum() {
 
   return (
     <section
+      ref={sectionRef}
       id="curriculum"
       data-section="curriculum"
       className="section curriculum-section"
@@ -115,12 +146,21 @@ export default function Curriculum() {
         <div className="curriculum-viewport">
           <div className="module-track" ref={trackRef}>
             {MODULES.map((m, i) => (
-              <Card key={m.index} m={m} active={i === active} />
+              <Card key={m.index} m={m} active={i === active} onSelect={() => jumpToModule(i)} />
             ))}
           </div>
         </div>
         <div className="curriculum-progress">
-          <div className="progress-track">
+          <div
+            className="progress-track"
+            style={{ cursor: 'pointer' }}
+            onClick={(e) => {
+              const r = e.currentTarget.getBoundingClientRect();
+              const clickP = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width));
+              const idx = Math.round(clickP * (MODULES.length - 1));
+              jumpToModule(idx);
+            }}
+          >
             <div className="progress-fill" ref={barRef} />
           </div>
           <span className="micro progress-counter">

@@ -1,12 +1,39 @@
 import type { Metadata } from 'next';
-import RegisterShell, { RegisterIntro } from '@/components/register/RegisterShell';
+import dynamic from 'next/dynamic';
+import { RegisterIntro } from '@/components/register/RegisterShell';
+
+/**
+ * Client-only mount of RegisterShell to prevent SSR hydration mismatches
+ * with framer-motion AnimatePresence, sessionStorage draft restoration, and react-hook-form.
+ */
+const RegisterShell = dynamic(
+  () => import('@/components/register/RegisterShell'),
+  {
+    ssr: false,
+    loading: () => (
+      <div
+        className="form-card glass"
+        style={{
+          minHeight: '480px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <span className="micro" style={{ color: 'var(--muted)' }}>
+          Loading registration...
+        </span>
+      </div>
+    ),
+  }
+);
 
 export const metadata: Metadata = {
-  title: 'Register · XR Skill Lab · BMSIT&M',
-  description: 'Register for the 2-day, hands-on XR Skill Lab at BMSIT&M.',
+  title: 'Register · AR/VR Workshop · BMSIT&M',
+  description:
+    'Register for the hands-on AR/VR Workshop at BMSIT&M. Capped at 100 members, 40 will be shortlisted.',
 };
 
-/** /register (§10): intro column + 4-step form card. */
 export default function RegisterPage() {
   return (
     <div className="register-page">
