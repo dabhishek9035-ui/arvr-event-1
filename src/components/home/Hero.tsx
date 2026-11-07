@@ -39,6 +39,13 @@ export default function Hero() {
       <div className="hero-planet" aria-hidden="true" />
       <div className="container hero-inner">
         <div className="hero-copy">
+          <motion.div className="hero-telemetry" {...enter(0)}>
+            <span className="telemetry-pill">
+              <span className="telemetry-dot" aria-hidden="true" />
+              SYS.ONLINE // 0x4F21A1
+            </span>
+            <span className="telemetry-coords">BMSIT&amp;M · 13.1332° N, 77.5683° E</span>
+          </motion.div>
           <motion.h1 className="display-xl hero-h1" {...enter(1)}>
             <span>Build worlds.</span>
             <span className="accent-text">Step inside them.</span>
@@ -65,6 +72,12 @@ export default function Hero() {
           </div>
         ))}
       </motion.div>
+      <div className={`scroll-cue${past ? ' hidden' : ''}`} aria-hidden="true">
+        <div className="scroll-cue-line">
+          <span className="scroll-cue-dot" />
+        </div>
+        <span className="scroll-cue-label">SCROLL</span>
+      </div>
     </section>
   );
 }

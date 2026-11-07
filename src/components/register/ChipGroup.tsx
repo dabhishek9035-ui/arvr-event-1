@@ -5,25 +5,28 @@ import { useFormContext, type FieldPath } from 'react-hook-form';
 import type { RegistrationInput } from '@/lib/registration';
 import { FieldError } from './Field';
 
-/** Multi-select chip group (§10.4): real checkboxes, label = pill. */
+interface ChipGroupProps {
+  name: FieldPath<RegistrationInput>;
+  legend: string;
+  options: readonly string[];
+  helper?: string;
+}
+
+/** Multi-select chip group: real checkboxes, label = pill. */
 export default function ChipGroup({
   name,
   legend,
   options,
   helper,
-}: {
-  name: FieldPath<RegistrationInput>;
-  legend: string;
-  options: readonly string[];
-  helper?: string;
-}) {
+}: ChipGroupProps) {
   const { register, getFieldState, formState } = useFormContext<RegistrationInput>();
   const { error } = getFieldState(name, formState);
   const reg = register(name);
 
   return (
     <fieldset className={`choice-group${error ? ' has-error' : ''}`}>
-      <legend className="micro choice-legend">{legend}</legend>
+      <legend className="choice-legend">{legend}</legend>
+      {helper ? <p className="choice-helper">{helper}</p> : null}
       <div className="choice-row">
         {options.map((opt) => (
           <label className="choice-pill" key={opt}>
@@ -35,11 +38,7 @@ export default function ChipGroup({
           </label>
         ))}
       </div>
-      {error?.message ? (
-        <FieldError message={error.message} />
-      ) : helper ? (
-        <p className="field-helper">{helper}</p>
-      ) : null}
+      <FieldError message={error?.message} />
     </fieldset>
   );
 }
