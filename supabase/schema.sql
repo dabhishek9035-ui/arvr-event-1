@@ -1,6 +1,5 @@
 -- ==============================================================================
 -- AR/VR Workshop Registration Schema (Supabase)
--- Project ID: ofltdenhtlpykwjbqmwl
 -- Cap: 100 registrations, 40 to be shortlisted
 -- ==============================================================================
 

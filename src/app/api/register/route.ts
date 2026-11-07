@@ -1,11 +1,22 @@
 import { NextResponse } from 'next/server';
-import { supabase, REGISTRATION_CAP, SHORTLIST_COUNT } from '@/lib/supabase';
+import { supabase, REGISTRATION_CAP, SHORTLIST_COUNT, isSupabaseConfigured } from '@/lib/supabase';
 import { registrationSchema } from '@/lib/registration';
 
 export const dynamic = 'force-dynamic';
 
 export async function POST(req: Request) {
   try {
+    if (!isSupabaseConfigured) {
+      return NextResponse.json(
+        {
+          success: false,
+          error:
+            'Supabase is not configured on the server. Please set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in your environment variables.',
+        },
+        { status: 503 }
+      );
+    }
+
     const json = await req.json();
     const result = registrationSchema.safeParse(json);
 
@@ -128,7 +139,7 @@ export async function POST(req: Request) {
           {
             success: false,
             error:
-              "The 'registrations' table is not yet created in Supabase. Please open Supabase Dashboard (project ofltdenhtlpykwjbqmwl) -> SQL Editor, and run 'supabase/schema.sql'.",
+              "The 'registrations' table is not yet created in Supabase. Please open your Supabase Dashboard -> SQL Editor, and run 'supabase/schema.sql'.",
           },
           { status: 503 }
         );

@@ -1,11 +1,15 @@
 import { NextResponse } from 'next/server';
-import { supabase } from '@/lib/supabase';
+import { supabase, isSupabaseConfigured } from '@/lib/supabase';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 export async function GET(req: Request) {
   try {
+    if (!isSupabaseConfigured) {
+      return NextResponse.json({ exists: false });
+    }
+
     const { searchParams } = new URL(req.url);
     const email = searchParams.get('email')?.trim().toLowerCase() || '';
     const phone = searchParams.get('phone')?.replace(/[\s-]/g, '') || '';

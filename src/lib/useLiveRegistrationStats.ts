@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import type { RealtimeChannel } from '@supabase/supabase-js';
-import { supabase } from '@/lib/supabase';
+import { supabase, isSupabaseConfigured } from '@/lib/supabase';
 import { useStore, type RegistrationStats } from '@/state/store';
 
 export async function fetchLiveRegistrationStats(): Promise<RegistrationStats | null> {
@@ -71,7 +71,7 @@ function startLiveSubscription() {
   fetchLiveRegistrationStats();
 
   // 2. Realtime WebSocket channel (only one instance)
-  if (!singletonChannel) {
+  if (isSupabaseConfigured && !singletonChannel) {
     try {
       const channel = supabase.channel('realtime:registrations-live');
       channel

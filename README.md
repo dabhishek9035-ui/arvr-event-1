@@ -1,6 +1,6 @@
-# AR/VR Hub — BMSIT&M
+# AR/VR Hub â€” BMSIT&M
 
-Website for the AR/VR Hub at BMS Institute of Technology and Management. It presents the club's XR Skill Lab and accepts workshop registrations for the two-day, 12-hour event on **19–20 November 2026**.
+Website for the AR/VR Hub at BMS Institute of Technology and Management. It presents the club's XR Skill Lab and accepts workshop registrations for the two-day, 12-hour event on **19â€“20 November 2026**.
 
 The home page is a nine-section, scroll-driven story backed by a shared 3D scene. Students register at `/register`; registrations, duplicate checks, and live capacity status are handled through Next.js API routes backed by Supabase.
 
@@ -13,7 +13,7 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000). The project includes default Supabase project URL and publishable key values in `src/lib/supabase.ts`; set the environment variables below to use a different Supabase project.
+Open [http://localhost:3000](http://localhost:3000). Copy `.env.example` to `.env.local` and set the URL and publishable key for your Supabase project before using registration. The app can still run without them, but registration APIs report that Supabase is not configured.
 
 For a production build:
 
@@ -30,8 +30,8 @@ Create a Supabase project, then run [`supabase/schema.sql`](supabase/schema.sql)
 
 | Variable | Purpose | Default |
 |---|---|---|
-| `NEXT_PUBLIC_SUPABASE_URL` | Supabase project URL | Project URL in `src/lib/supabase.ts` |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase publishable/anon key | Publishable key in `src/lib/supabase.ts` |
+| `NEXT_PUBLIC_SUPABASE_URL` | Supabase project URL | None; set in `.env.local` |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase publishable/anon key | None; set in `.env.local` |
 | `REGISTRATION_CAP` | Maximum registrations accepted by the API | `100` |
 | `SHORTLIST_CAP` | Shortlist size shown by the API | `40` |
 
