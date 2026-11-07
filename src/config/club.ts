@@ -1,7 +1,7 @@
 export const CLUB = {
   name: 'AR/VR Hub',
   shortName: 'AR/VR HUB',
-  logo: '/brand/arvrhub-logo.png',
+  logo: '/brand/arvrhub-logo.png?v=2',
   institution: 'BMSIT&M',
   city: 'Bangalore',
   tagline: 'Build worlds. Step inside them.',

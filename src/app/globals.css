@@ -354,7 +354,8 @@ h3 {
   width: 44px;
   height: 44px;
   object-fit: contain;
-  border-radius: 10px;
+  border-radius: 50%;
+  border: 1px solid rgba(180, 140, 222, 0.28);
 }
 .brand-text {
   display: flex;
@@ -515,7 +516,8 @@ h3 {
   width: 56px;
   height: 56px;
   object-fit: contain;
-  border-radius: 12px;
+  border-radius: 50%;
+  border: 1px solid rgba(180, 140, 222, 0.28);
 }
 .footer-social {
   display: flex;
