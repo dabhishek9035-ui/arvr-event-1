@@ -786,41 +786,77 @@ a.social-link:hover {
 .collab-strip-section {
   padding-block: 8px 40px;
 }
+
+/* Laptop and up: no box — the line reads as one huge headline */
+.collab-strip-section .container {
+  max-width: none;
+  width: auto;
+  padding-inline: 24px;
+}
 .collab-strip {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  text-align: center;
-  padding: 18px 22px;
-  border-radius: 16px;
-  border: 1px solid rgba(180, 140, 222, 0.4);
-  background: linear-gradient(135deg, rgba(92, 51, 204, 0.45) 0%, rgba(122, 87, 219, 0.24) 100%);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.08),
-    0 20px 44px -26px rgba(0, 0, 0, 0.75);
+  display: block;
+  padding: 8px 0 24px;
+  width: auto;
+  margin-inline: 0;
 }
 .collab-strip-text {
-  font: 500 clamp(15px, 4vw, 17px) var(--font-body);
+  display: inline;
+  white-space: nowrap;
+  font: 700 clamp(22px, 2.3vw, 40px) / 1.15 var(--font-display);
   color: var(--text);
 }
 .collab-strip-name {
-  font: 700 clamp(14px, 4.2vw, 19px) var(--font-display);
-  letter-spacing: 0.02em;
-  color: #e6d9ff;
-  text-transform: uppercase;
+  display: inline;
+  white-space: nowrap;
+  font: 700 clamp(24px, 2.55vw, 44px) / 1.1 var(--font-display);
+  letter-spacing: 0;
+  background: linear-gradient(95deg, #b48cde 0%, #9333ea 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
-@media (max-width: 559px) {
+/* Phones: keep the compact gradient card */
+@media (max-width: 759px) {
   .collab-strip {
-    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    text-align: center;
+    padding: 18px 22px;
+    border-radius: 16px;
+    border: 1px solid rgba(180, 140, 222, 0.4);
+    background: linear-gradient(135deg, rgba(92, 51, 204, 0.45) 0%, rgba(122, 87, 219, 0.24) 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.08),
+      0 20px 44px -26px rgba(0, 0, 0, 0.75);
   }
   .collab-strip-text {
-    font-size: 13.5px;
+    display: block;
+    font: 500 13.5px var(--font-body);
+    color: var(--text);
   }
   .collab-strip-name {
-    font-size: 12.5px;
+    display: block;
+    font: 700 12.5px var(--font-display);
     letter-spacing: 0.05em;
+    color: #e6d9ff;
+    text-transform: uppercase;
+    background: none;
+    -webkit-background-clip: initial;
+    background-clip: initial;
+  }
+  @media (max-width: 559px) {
+    .collab-strip {
+      padding: 16px 18px;
+    }
+    .collab-strip-text {
+      font-size: 13.5px;
+    }
+    .collab-strip-name {
+      font-size: 12.5px;
+    }
   }
 }
 
