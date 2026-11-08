@@ -49,11 +49,13 @@ export default function StepReview({
   onSubmit,
   isSubmitting = false,
   errorMessage = null,
+  registrationCap,
 }: {
   onBack: (step: number) => void;
   onSubmit: () => void;
   isSubmitting?: boolean;
   errorMessage?: string | null;
+  registrationCap: number;
 }) {
   const { getValues } = useFormContext<RegistrationInput>();
   const values = getValues();
@@ -69,7 +71,7 @@ export default function StepReview({
         Review your details
       </h2>
       <p className="micro" style={{ color: 'var(--muted)', marginBottom: '20px' }}>
-        Please check all details before submitting. Capped to 100 members.
+        Please check all details before submitting. Capped to {registrationCap} members.
       </p>
 
       {errorMessage ? (

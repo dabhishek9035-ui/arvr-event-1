@@ -18,9 +18,13 @@ import { FieldError, WordTextAreaField } from './Field';
 export default function StepInterest({
   onBack,
   onContinue,
+  registrationCap,
+  shortlistCount,
 }: {
   onBack: () => void;
   onContinue: () => void;
+  registrationCap: number;
+  shortlistCount: number;
 }) {
   const { register, getFieldState, formState } = useFormContext<RegistrationInput>();
   const consentError = getFieldState('consent', formState).error;
@@ -140,7 +144,7 @@ export default function StepInterest({
             <Check size={14} strokeWidth={3} />
           </span>
           <span>
-            I confirm my details are accurate and understand that 40 members will be shortlisted from the 100 registrations.
+            I confirm my details are accurate and understand that {shortlistCount} members will be shortlisted from the {registrationCap} registrations.
           </span>
         </label>
         <FieldError message={consentError?.message} />

@@ -23,6 +23,8 @@ export interface SubmittedRegistration {
 interface DoneProps {
   onEdit?: () => void;
   registeredCount?: number;
+  registrationCap: number;
+  shortlistCount: number;
   data?: SubmittedRegistration;
   isAlreadyRegistered?: boolean;
   message?: string;
@@ -35,6 +37,8 @@ const WHATSAPP_LINK =
 
 export default function Done({
   registeredCount,
+  registrationCap,
+  shortlistCount,
   data: customData,
   isAlreadyRegistered = false,
   message,
@@ -124,12 +128,12 @@ export default function Done({
           </strong>
         </div>
         <p style={{ margin: 0, fontSize: '14px', color: 'var(--text)', lineHeight: '1.6' }}>
-          Registrations are strictly capped at <strong>100 members</strong>.
-          Once 100 members register, <strong>40 members will be shortlisted</strong> for the hands-on workshop based on responses and system requirements.
+          Registrations are strictly capped at <strong>{registrationCap} members</strong>.
+          Once {registrationCap} members register, <strong>{shortlistCount} members will be shortlisted</strong> for the hands-on workshop based on responses and system requirements.
         </p>
         {registeredCount || data.registeredCount ? (
           <p style={{ margin: '8px 0 0', fontSize: '12px', color: 'var(--accent-2)' }}>
-            You are registration #{registeredCount || data.registeredCount} of 100.
+            You are registration #{registeredCount || data.registeredCount} of {registrationCap}.
           </p>
         ) : null}
       </div>

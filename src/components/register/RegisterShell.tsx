@@ -42,6 +42,8 @@ export default function RegisterShell() {
 
   // Live real-time registration stats
   const regStatus = useLiveRegistrationStats();
+  const registrationCap = regStatus?.cap ?? 100;
+  const shortlistCount = regStatus?.shortlistCount ?? 40;
 
   const setRegStep = useStore((s) => s.setRegStep);
   const reduced = useStore((s) => s.reducedMotion);
@@ -243,6 +245,21 @@ export default function RegisterShell() {
 
       // Successful registration!
       clearDraft();
+      const submittedCount =
+        typeof result.registeredCount === 'number' ? result.registeredCount : undefined;
+      const submittedCap = typeof result.cap === 'number' ? result.cap : 100;
+      const submittedShortlistCount =
+        typeof result.shortlistCount === 'number' ? result.shortlistCount : 40;
+      if (submittedCount !== undefined) {
+        useStore.getState().setRegistrationStats({
+          count: submittedCount,
+          cap: submittedCap,
+          remaining: Math.max(0, submittedCap - submittedCount),
+          isClosed: submittedCount >= submittedCap,
+          shortlistCount: submittedShortlistCount,
+          dbReady: true,
+        });
+      }
       const savedRecord: SubmittedRegistration = {
         fullName: data.fullName,
         usn: data.usn,
@@ -253,18 +270,18 @@ export default function RegisterShell() {
         section: data.section,
         githubUrl: data.githubUrl,
         linkedinUrl: data.linkedinUrl,
-        registeredCount: result.registeredCount,
+        registeredCount: submittedCount,
       };
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(savedRecord));
       } catch {}
 
       // Immediately notify live stats system (Zustand + BroadcastChannel + Window Event)
-      notifyRegistrationSuccessful(result.registeredCount);
+      notifyRegistrationSuccessful(submittedCount);
 
       setExistingRecord(savedRecord);
       setIsAlreadyRegistered(false);
-      setRegisteredCount(result.registeredCount);
+      setRegisteredCount(submittedCount);
       setStatus('ready');
     } catch {
       setSubmitError('Unable to connect to the server. Please check your internet connection.');
@@ -294,7 +311,7 @@ export default function RegisterShell() {
     );
   }
 
-  // If registrations have reached 100 cap and closed (and user hasn't registered)
+  // If registrations have reached the configured cap and closed (and user hasn't registered)
   if (regStatus?.isClosed && status !== 'ready' && !existingRecord) {
     return (
       <div className="form-card glass" style={{ textAlign: 'center', padding: '48px 32px' }}>
@@ -314,8 +331,8 @@ export default function RegisterShell() {
           Registrations are closed
         </h2>
         <p style={{ color: 'var(--muted)', fontSize: '15px', lineHeight: '1.6', maxWidth: '420px', margin: '0 auto 24px' }}>
-          We have reached the maximum limit of <strong>100 registrations</strong>.
-          Registration is now closed. From the applicants, <strong>40 members will be shortlisted</strong> and notified.
+          We have reached the maximum limit of <strong>{registrationCap} registrations</strong>.
+          Registration is now closed. From the applicants, <strong>{shortlistCount} members will be shortlisted</strong> and notified.
         </p>
         <a
           className="btn btn-whatsapp"
@@ -338,6 +355,8 @@ export default function RegisterShell() {
           <Done
             data={existingRecord || undefined}
             registeredCount={registeredCount}
+            registrationCap={registrationCap}
+            shortlistCount={shortlistCount}
             isAlreadyRegistered={isAlreadyRegistered}
             message={alreadyRegisteredMessage}
             onClearRegistration={handleClearRegistration}
@@ -356,13 +375,21 @@ export default function RegisterShell() {
             >
               {step === 0 && <StepYou onContinue={advance} />}
               {step === 1 && <StepCampus onBack={() => setStep(0)} onContinue={advance} />}
-              {step === 2 && <StepInterest onBack={() => setStep(1)} onContinue={advance} />}
+              {step === 2 && (
+                <StepInterest
+                  onBack={() => setStep(1)}
+                  onContinue={advance}
+                  registrationCap={registrationCap}
+                  shortlistCount={shortlistCount}
+                />
+              )}
               {step === 3 && (
                 <StepReview
                   onBack={(n) => setStep(n)}
                   onSubmit={submit}
                   isSubmitting={isSubmitting}
                   errorMessage={submitError}
+                  registrationCap={registrationCap}
                 />
               )}
             </motion.div>
@@ -385,10 +412,10 @@ export function RegisterIntro() {
     <div className="register-intro">
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '16px' }}>
         <span className="pill pill-accent" style={{ letterSpacing: '0.04em' }}>
-          {mounted && stats?.isClosed ? 'REGISTRATIONS CLOSED' : 'CAPPED AT 100 REGISTRATIONS'}
+          {mounted && stats?.isClosed ? 'REGISTRATIONS CLOSED' : `CAPPED AT ${stats?.cap ?? 100} REGISTRATIONS`}
         </span>
         <span className="pill" style={{ background: 'rgba(255, 255, 255, 0.06)', color: 'var(--text)' }}>
-          40 WILL BE SHORTLISTED
+          {stats?.shortlistCount ?? 40} WILL BE SHORTLISTED
         </span>
         {mounted && stats && typeof stats.count === 'number' && stats.count > 0 ? (
           <span
@@ -454,7 +481,7 @@ export function RegisterIntro() {
             />
             <span>
               {mounted && stats
-                ? `${stats.count} of ${stats.cap || 100} spots filled (${stats.remaining} remaining)`
+                ? `${stats.count} of ${stats.cap ?? 100} spots filled (${stats.remaining} remaining)`
                 : 'Loading live registrations...'}
             </span>
           </span>

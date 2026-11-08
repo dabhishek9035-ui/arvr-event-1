@@ -10,7 +10,7 @@ export default function CollaborationStrip() {
         <Reveal>
           <div className="collab-strip">
             <p className="collab-strip-text">
-              With industry collaboration with{' '}
+              In industry collaboration with{' '}
               <span className="collab-strip-name">BODYCLONE&nbsp;TECHNOLOGIES</span>
             </p>
           </div>
