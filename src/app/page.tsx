@@ -1,4 +1,5 @@
 import Hero from '@/components/home/Hero';
+import CollaborationStrip from '@/components/home/CollaborationStrip';
 import XrIntro from '@/components/home/XrIntro';
 import Programme from '@/components/home/Programme';
 import Curriculum from '@/components/home/Curriculum';
@@ -13,6 +14,7 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+      <CollaborationStrip />
       <XrIntro />
       <Programme />
       <Curriculum />

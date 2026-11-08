@@ -16,8 +16,11 @@ export default function StepYou({ onContinue }: { onContinue: () => void }) {
       <h2 className="step-heading" tabIndex={-1}>
         Let&rsquo;s start with your details
       </h2>
-      <p className="step-instruction-text" style={{ marginBottom: '20px' }}>
+      <p className="step-instruction-text" style={{ marginBottom: '8px' }}>
         Please enter your contact and profile details.
+      </p>
+      <p className="step-note">
+        Note that certificates will only be provided after project submission.
       </p>
 
       <div className="field-rows">

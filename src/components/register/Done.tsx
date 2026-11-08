@@ -134,6 +134,17 @@ export default function Done({
         ) : null}
       </div>
 
+      <p
+        style={{
+          margin: '0 0 16px',
+          fontSize: '12.5px',
+          color: 'var(--muted)',
+          lineHeight: 1.55,
+        }}
+      >
+        Note that certificates will only be provided after project submission.
+      </p>
+
       <div
         style={{
           background: 'rgba(255, 255, 255, 0.02)',
